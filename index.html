@@ -10,71 +10,173 @@
 
 <link rel="stylesheet" href="style.css">
 
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 </head>
 
 <body>
 
-<!-- =========================
-     LOADER
-========================= -->
+<!-- LOADER -->
 
 <div id="loader">
 
-    <h1>OSVALDÃO NIGHTMARE</h1>
+    <div class="loader-content">
 
-    <div class="loading-bar">
+        <h1>OSVALDÃO</h1>
 
-        <div class="loading-fill"></div>
+        <h2>NIGHTMARE</h2>
+
+        <div class="loading-bar">
+
+            <div class="loading-fill"></div>
+
+        </div>
+
+        <p>Carregando Hospital Psiquiátrico...</p>
 
     </div>
 
-    <p>Carregando arquivos do hospital...</p>
-
 </div>
 
-<!-- =========================
-     MENU PRINCIPAL
-========================= -->
+<!-- FUNDO -->
+
+<div id="background"></div>
+
+<div id="fog-layer"></div>
+
+<div id="vignette"></div>
+
+<!-- MONSTRO FLASH -->
+
+<img
+src="images/monster.png"
+id="monsterFlash"
+alt="Monstro"
+>
+
+<!-- MENU -->
 
 <section id="mainMenu">
 
-    <div class="menu-overlay"></div>
+    <div class="left-panel">
 
-    <div class="menu-content">
+        <div class="logo-box">
 
-        <h1 class="game-title">
+            <h1 class="logo-main">
 
-            OSVALDÃO
+                OSVALDÃO
 
-            <span>NIGHTMARE</span>
+            </h1>
 
-        </h1>
+            <h2 class="logo-sub">
 
-        <p class="subtitle">
+                NIGHTMARE
 
-            Nem todos conseguiram sair...
+            </h2>
 
-        </p>
+            <p class="tagline">
+
+                Nem todos conseguiram sair...
+
+            </p>
+
+        </div>
 
         <div class="menu-buttons">
 
-            <button id="playBtn">
-                JOGAR
+            <button id="continueBtn">
+
+                CONTINUAR
+
+            </button>
+
+            <button id="newGameBtn">
+
+                NOVO JOGO
+
+            </button>
+
+            <button id="difficultyBtn">
+
+                DIFICULDADE
+
             </button>
 
             <button id="settingsBtn">
+
                 CONFIGURAÇÕES
+
             </button>
 
             <button id="creditsBtn">
+
                 CRÉDITOS
+
             </button>
 
             <button id="exitBtn">
+
                 SAIR
+
             </button>
+
+        </div>
+
+    </div>
+
+    <div class="right-panel">
+
+        <div class="player-card">
+
+            <div class="player-avatar">
+
+                👤
+
+            </div>
+
+            <h3>JOGADOR</h3>
+
+            <p>Nível: <span id="playerLevel">1</span></p>
+
+            <p>Escapes: <span id="playerEscapes">0</span></p>
+
+            <p>Mortes: <span id="playerDeaths">0</span></p>
+
+        </div>
+
+        <div class="news-box">
+
+            <h2>ÚLTIMAS NOTÍCIAS</h2>
+
+            <div class="news-item">
+
+                <h3>Atualização 0.1</h3>
+
+                <p>Novo monstro adicionado ao hospital.</p>
+
+            </div>
+
+            <div class="news-item">
+
+                <h3>Mapa Expandido</h3>
+
+                <p>Novos corredores e salas secretas.</p>
+
+            </div>
+
+        </div>
+
+        <div class="progress-box">
+
+            <h2>PROGRESSO</h2>
+
+            <div class="progress-bar">
+
+                <div class="progress-fill"></div>
+
+            </div>
+
+            <span id="progressText">0%</span>
 
         </div>
 
@@ -82,11 +184,45 @@
 
 </section>
 
-<!-- =========================
-     CONFIGURAÇÕES
-========================= -->
+<!-- DIFICULDADE -->
 
-<div id="settingsMenu" class="popup">
+<div class="popup" id="difficultyMenu">
+
+    <div class="popup-content">
+
+        <h2>DIFICULDADE</h2>
+
+        <button class="difficulty-option">
+
+            FÁCIL
+
+        </button>
+
+        <button class="difficulty-option">
+
+            NORMAL
+
+        </button>
+
+        <button class="difficulty-option">
+
+            PESADELO
+
+        </button>
+
+        <button class="closePopup">
+
+            FECHAR
+
+        </button>
+
+    </div>
+
+</div>
+
+<!-- CONFIGURAÇÕES -->
+
+<div class="popup" id="settingsMenu">
 
     <div class="popup-content">
 
@@ -97,12 +233,11 @@
             Volume
 
             <input
-                type="range"
-                min="0"
-                max="100"
-                value="80"
-                id="volumeSlider"
-            >
+            type="range"
+            min="0"
+            max="100"
+            value="80"
+            id="volumeSlider">
 
         </label>
 
@@ -111,57 +246,49 @@
             Sensibilidade
 
             <input
-                type="range"
-                min="1"
-                max="10"
-                value="5"
-                id="sensitivitySlider"
-            >
+            type="range"
+            min="1"
+            max="10"
+            value="5"
+            id="sensitivitySlider">
 
         </label>
 
         <button class="closePopup">
+
             FECHAR
+
         </button>
 
     </div>
 
 </div>
 
-<!-- =========================
-     CRÉDITOS
-========================= -->
+<!-- CRÉDITOS -->
 
-<div id="creditsMenu" class="popup">
+<div class="popup" id="creditsMenu">
 
     <div class="popup-content">
 
         <h2>CRÉDITOS</h2>
 
-        <p>
-            OSVALDÃO NIGHTMARE
-        </p>
+        <p>OSVALDÃO NIGHTMARE</p>
 
-        <p>
-            Jogo de terror em primeira pessoa.
-        </p>
+        <p>Jogo de terror psicológico.</p>
 
-        <p>
-            Inspirado em exploração, sobrevivência
-            e suspense.
-        </p>
+        <p>Desenvolvido com HTML, CSS e JavaScript.</p>
 
         <button class="closePopup">
+
             FECHAR
+
         </button>
 
     </div>
 
 </div>
 
-<!-- =========================
-     INTRODUÇÃO
-========================= -->
+<!-- INTRODUÇÃO -->
 
 <section id="introScreen">
 
@@ -170,31 +297,34 @@
         <h2>ARQUIVO CONFIDENCIAL</h2>
 
         <p>
-            O Hospital Psiquiátrico Osvaldão
-            foi fechado após diversos
-            desaparecimentos misteriosos.
+
+            Em 1987, o Hospital Psiquiátrico Osvaldão
+            foi fechado após uma série de desaparecimentos.
+
         </p>
 
         <p>
-            Equipes de resgate entraram
-            no local e nunca mais foram vistas.
+
+            Nenhum dos pacientes foi encontrado.
+
         </p>
 
         <p>
-            Moradores da região afirmam ouvir
-            gritos vindos dos corredores
-            durante a madrugada.
+
+            Relatos afirmam que criaturas ainda vagam
+            pelos corredores escuros.
+
         </p>
 
         <p>
-            Sua missão é investigar o local,
-            descobrir o que aconteceu
-            e encontrar uma saída.
+
+            Sua missão é sobreviver.
+
         </p>
 
         <button id="startMission">
 
-            INICIAR MISSÃO
+            ENTRAR NO HOSPITAL
 
         </button>
 
@@ -202,219 +332,13 @@
 
 </section>
 
-<!-- =========================
-     TELA DO JOGO
-========================= -->
-
-<section id="gameScreen">
-
-    <!-- THREE.JS -->
-
-    <div id="gameContainer"></div>
-
-    <!-- HUD -->
-
-    <div id="hud">
-
-        <!-- MIRA -->
-
-        <div id="crosshair">
-
-            <div class="cross-top"></div>
-            <div class="cross-bottom"></div>
-            <div class="cross-left"></div>
-            <div class="cross-right"></div>
-
-        </div>
-
-        <!-- OBJETIVO -->
-
-        <div id="objectiveBox">
-
-            OBJETIVO:
-            Encontrar a chave principal.
-
-        </div>
-
-        <!-- LANERNA -->
-
-        <div id="flashlightHud">
-
-            🔦 BATERIA:
-            <span id="batteryValue">
-                100%
-            </span>
-
-        </div>
-
-        <!-- VIDA -->
-
-        <div id="healthHud">
-
-            ❤️ VIDA:
-            <span id="healthValue">
-                100
-            </span>
-
-        </div>
-
-        <!-- STAMINA -->
-
-        <div id="staminaHud">
-
-            🏃 STAMINA:
-            <span id="staminaValue">
-                100
-            </span>
-
-        </div>
-
-        <!-- INVENTÁRIO -->
-
-        <div id="inventory">
-
-            <h3>INVENTÁRIO</h3>
-
-            <ul id="inventoryList">
-
-                <li>Lanterna</li>
-
-            </ul>
-
-        </div>
-
-    </div>
-
-</section>
-
-<!-- =========================
-     MENU DE PAUSA
-========================= -->
-
-<div id="pauseMenu">
-
-    <div class="pause-content">
-
-        <h2>JOGO PAUSADO</h2>
-
-        <button id="resumeBtn">
-
-            CONTINUAR
-
-        </button>
-
-        <button id="backMenuBtn">
-
-            MENU PRINCIPAL
-
-        </button>
-
-    </div>
-
-</div>
-
-<!-- =========================
-     TELA DE MORTE
-========================= -->
-
-<div id="deathScreen">
-
-    <div class="death-content">
-
-        <h1>VOCÊ MORREU</h1>
-
-        <p>
-
-            A criatura encontrou você.
-
-        </p>
-
-        <button id="restartBtn">
-
-            TENTAR NOVAMENTE
-
-        </button>
-
-    </div>
-
-</div>
-
-<!-- =========================
-     TELA DE VITÓRIA
-========================= -->
-
-<div id="winScreen">
-
-    <div class="win-content">
-
-        <h1>VOCÊ ESCAPOU</h1>
-
-        <p>
-
-            Você descobriu os segredos
-            do Hospital Osvaldão.
-
-        </p>
-
-        <button id="playAgainBtn">
-
-            JOGAR NOVAMENTE
-
-        </button>
-
-    </div>
-
-</div>
-
-<!-- =========================
-     ÁUDIOS
-========================= -->
-
-<audio id="ambientAudio" loop>
-
-    <source
-        src="audio/ambient.mp3"
-        type="audio/mpeg"
-    >
-
-</audio>
-
-<audio id="monsterAudio">
-
-    <source
-        src="audio/monster.mp3"
-        type="audio/mpeg"
-    >
-
-</audio>
-
-<audio id="doorAudio">
-
-    <source
-        src="audio/door.mp3"
-        type="audio/mpeg"
-    >
-
-</audio>
-
-<audio id="heartbeatAudio" loop>
-
-    <source
-        src="audio/heartbeat.mp3"
-        type="audio/mpeg"
-    >
-
-</audio>
-
-<!-- =========================
-     CONTROLES
-========================= -->
+<!-- CONTROLES -->
 
 <div id="controlsInfo">
 
     <h3>CONTROLES</h3>
 
-    <p>W A S D - Movimentação</p>
+    <p>W A S D - Mover</p>
     <p>SHIFT - Correr</p>
     <p>F - Lanterna</p>
     <p>E - Interagir</p>
@@ -422,12 +346,38 @@
 
 </div>
 
-<!-- =========================
-     SCRIPTS
-========================= -->
+<!-- AUDIOS -->
 
-<script type="module" src="game.js"></script>
+<audio id="ambientAudio" loop>
+
+    <source src="audio/ambient.mp3" type="audio/mpeg">
+
+</audio>
+
+<audio id="jumpAudio">
+
+    <source src="audio/jumpscare.mp3" type="audio/mpeg">
+
+</audio>
+
+<audio id="menuHover">
+
+    <source src="audio/hover.mp3" type="audio/mpeg">
+
+</audio>
+
+<!-- SCRIPTS -->
+
 <script src="script.js"></script>
 
 </body>
 </html>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.179.1/build/three.module.js"
+  }
+}
+</script>
+
+<script type="module" src="game.js"></script>

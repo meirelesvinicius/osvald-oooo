@@ -4,20 +4,27 @@
 
 const loader = document.getElementById("loader");
 
-const playBtn = document.getElementById("playBtn");
+const continueBtn = document.getElementById("continueBtn");
+const newGameBtn = document.getElementById("newGameBtn");
+const difficultyBtn = document.getElementById("difficultyBtn");
 const settingsBtn = document.getElementById("settingsBtn");
 const creditsBtn = document.getElementById("creditsBtn");
 const exitBtn = document.getElementById("exitBtn");
 
+const difficultyMenu = document.getElementById("difficultyMenu");
 const settingsMenu = document.getElementById("settingsMenu");
 const creditsMenu = document.getElementById("creditsMenu");
 
 const introScreen = document.getElementById("introScreen");
 const startMission = document.getElementById("startMission");
 
+const closeButtons = document.querySelectorAll(".closePopup");
+
+const menuHover = document.getElementById("menuHover");
+const jumpAudio = document.getElementById("jumpAudio");
 const ambientAudio = document.getElementById("ambientAudio");
 
-const closeButtons = document.querySelectorAll(".closePopup");
+const monsterFlash = document.getElementById("monsterFlash");
 
 // ==========================
 // LOADER
@@ -35,29 +42,27 @@ window.addEventListener("load", () => {
 
         }, 1000);
 
-    }, 2500);
+    }, 3000);
 
 });
 
 // ==========================
-// SOM AMBIENTE
+// AUDIO
 // ==========================
 
 let audioStarted = false;
 
 function startAudio() {
 
-    if (audioStarted) return;
+    if(audioStarted) return;
 
     audioStarted = true;
 
-    if (ambientAudio) {
+    if(ambientAudio){
 
-        ambientAudio.volume = 0.4;
+        ambientAudio.volume = 0.35;
 
-        ambientAudio.play().catch(() => {
-            console.log("Autoplay bloqueado.");
-        });
+        ambientAudio.play().catch(() => {});
 
     }
 
@@ -66,189 +71,346 @@ function startAudio() {
 document.addEventListener("click", startAudio);
 
 // ==========================
-// CONFIGURAÇÕES
+// HOVER SOUND
 // ==========================
 
-if (settingsBtn) {
+document.querySelectorAll("button").forEach(button => {
 
-    settingsBtn.addEventListener("click", () => {
+    button.addEventListener("mouseenter", () => {
 
-        settingsMenu.style.display = "flex";
+        if(menuHover){
+
+            menuHover.currentTime = 0;
+
+            menuHover.volume = 0.5;
+
+            menuHover.play().catch(() => {});
+
+        }
 
     });
 
-}
+});
 
 // ==========================
-// CRÉDITOS
+// POPUPS
 // ==========================
 
-if (creditsBtn) {
+settingsBtn.addEventListener("click", () => {
 
-    creditsBtn.addEventListener("click", () => {
+    settingsMenu.style.display = "flex";
 
-        creditsMenu.style.display = "flex";
+});
+
+creditsBtn.addEventListener("click", () => {
+
+    creditsMenu.style.display = "flex";
+
+});
+
+difficultyBtn.addEventListener("click", () => {
+
+    difficultyMenu.style.display = "flex";
+
+});
+
+closeButtons.forEach(btn => {
+
+    btn.addEventListener("click", () => {
+
+        settingsMenu.style.display = "none";
+        creditsMenu.style.display = "none";
+        difficultyMenu.style.display = "none";
 
     });
 
-}
+});
 
 // ==========================
-// FECHAR POPUPS
+// FECHAR FORA
 // ==========================
 
-closeButtons.forEach(button => {
+window.addEventListener("click", (e) => {
+
+    if(e.target === settingsMenu)
+        settingsMenu.style.display = "none";
+
+    if(e.target === creditsMenu)
+        creditsMenu.style.display = "none";
+
+    if(e.target === difficultyMenu)
+        difficultyMenu.style.display = "none";
+
+});
+
+// ==========================
+// DIFICULDADE
+// ==========================
+
+document.querySelectorAll(".difficulty-option")
+.forEach(button => {
 
     button.addEventListener("click", () => {
 
-        settingsMenu.style.display = "none";
-        creditsMenu.style.display = "none";
+        localStorage.setItem(
+            "difficulty",
+            button.textContent
+        );
+
+        alert(
+            "Dificuldade definida para: " +
+            button.textContent
+        );
+
+        difficultyMenu.style.display = "none";
 
     });
 
 });
 
 // ==========================
-// FECHAR AO CLICAR FORA
+// NOVO JOGO
 // ==========================
 
-window.addEventListener("click", (event) => {
+newGameBtn.addEventListener("click", () => {
 
-    if (event.target === settingsMenu) {
-
-        settingsMenu.style.display = "none";
-
-    }
-
-    if (event.target === creditsMenu) {
-
-        creditsMenu.style.display = "none";
-
-    }
+    introScreen.style.display = "flex";
 
 });
 
 // ==========================
-// JOGAR
+// CONTINUAR
 // ==========================
 
-if (playBtn) {
+continueBtn.addEventListener("click", () => {
 
-    playBtn.addEventListener("click", () => {
+    const save =
+    localStorage.getItem("savegame");
 
-        introScreen.style.display = "flex";
+    if(save){
 
-    });
+        alert(
+            "Carregando progresso salvo..."
+        );
 
-}
+    }else{
+
+        alert(
+            "Nenhum progresso encontrado."
+        );
+
+    }
+
+});
 
 // ==========================
 // INICIAR MISSÃO
 // ==========================
 
-if (startMission) {
+startMission.addEventListener("click", () => {
 
-    startMission.addEventListener("click", () => {
+    localStorage.setItem(
+        "savegame",
+        "started"
+    );
 
-        introScreen.innerHTML = `
+    document.body.classList.add(
+        "game-starting"
+    );
 
-            <div class="intro-box">
+    setTimeout(() => {
 
-                <h2>CARREGANDO MISSÃO...</h2>
+        alert(
+            "A fase FPS será carregada na Parte 5."
+        );
 
-                <p>
-                    Preparando instalação subterrânea.
-                </p>
+        introScreen.style.display = "none";
 
-                <p>
-                    Gerando criaturas...
-                </p>
+    }, 2000);
 
-                <p>
-                    Carregando mapa...
-                </p>
+});
 
-            </div>
+// ==========================
+// SALVAR ESTATÍSTICAS
+// ==========================
 
-        `;
+if(!localStorage.getItem("playerLevel")){
 
-        setTimeout(() => {
+    localStorage.setItem(
+        "playerLevel",
+        "1"
+    );
 
-            alert("Fase 1 iniciada! (Em desenvolvimento)");
+    localStorage.setItem(
+        "playerEscapes",
+        "0"
+    );
 
-            introScreen.style.display = "none";
-
-        }, 3000);
-
-    });
+    localStorage.setItem(
+        "playerDeaths",
+        "0"
+    );
 
 }
 
+document.getElementById("playerLevel")
+.textContent =
+localStorage.getItem("playerLevel");
+
+document.getElementById("playerEscapes")
+.textContent =
+localStorage.getItem("playerEscapes");
+
+document.getElementById("playerDeaths")
+.textContent =
+localStorage.getItem("playerDeaths");
+
 // ==========================
-// BOTÃO SAIR
+// PROGRESSO
 // ==========================
 
-if (exitBtn) {
+let progress =
+localStorage.getItem("progress");
 
-    exitBtn.addEventListener("click", () => {
+if(!progress){
 
-        const sair = confirm("Deseja sair do jogo?");
-
-        if (sair) {
-
-            window.close();
-
-            setTimeout(() => {
-
-                alert("Feche a aba para sair do jogo.");
-
-            }, 100);
-
-        }
-
-    });
+    progress = 0;
 
 }
 
+document.querySelector(".progress-fill")
+.style.width =
+progress + "%";
+
+document.getElementById("progressText")
+.textContent =
+progress + "%";
+
 // ==========================
-// TECLA ESC
+// JUMPSCARE
 // ==========================
 
-document.addEventListener("keydown", (event) => {
+function randomJumpscare(){
 
-    if (event.key === "Escape") {
+    if(!monsterFlash) return;
+
+    monsterFlash.style.opacity = "1";
+
+    monsterFlash.classList.add(
+        "jumpscare"
+    );
+
+    if(jumpAudio){
+
+        jumpAudio.currentTime = 0;
+
+        jumpAudio.volume = 0.7;
+
+        jumpAudio.play().catch(() => {});
+
+    }
+
+    setTimeout(() => {
+
+        monsterFlash.style.opacity = "0";
+
+        monsterFlash.classList.remove(
+            "jumpscare"
+        );
+
+    }, 250);
+
+}
+
+setInterval(() => {
+
+    const chance =
+    Math.floor(Math.random() * 100);
+
+    if(chance > 94){
+
+        randomJumpscare();
+
+    }
+
+}, 20000);
+
+// ==========================
+// ESC
+// ==========================
+
+document.addEventListener(
+"keydown",
+(event)=>{
+
+    if(event.key === "Escape"){
 
         settingsMenu.style.display = "none";
         creditsMenu.style.display = "none";
-
-        if (introScreen.style.display === "flex") {
-
-            introScreen.style.display = "none";
-
-        }
+        difficultyMenu.style.display = "none";
 
     }
 
 });
 
 // ==========================
-// EFEITO DE TÍTULO
+// SAIR
 // ==========================
 
-const gameTitle = document.querySelector(".game-title");
+exitBtn.addEventListener("click", () => {
 
-if (gameTitle) {
+    const sair =
+    confirm(
+        "Deseja sair do jogo?"
+    );
 
-    setInterval(() => {
+    if(sair){
 
-        gameTitle.style.opacity = "0.85";
+        window.close();
 
         setTimeout(() => {
 
-            gameTitle.style.opacity = "1";
+            alert(
+                "Feche a aba para sair."
+            );
 
-        }, 100);
+        },100);
 
-    }, 5000);
+    }
 
-}
+});
+
+// ==========================
+// LOGO PISCANDO
+// ==========================
+
+setInterval(() => {
+
+    const logoMain =
+    document.querySelector(".logo-main");
+
+    const logoSub =
+    document.querySelector(".logo-sub");
+
+    if(!logoMain || !logoSub)
+        return;
+
+    logoMain.style.opacity = ".5";
+    logoSub.style.opacity = ".5";
+
+    setTimeout(() => {
+
+        logoMain.style.opacity = "1";
+        logoSub.style.opacity = "1";
+
+    },100);
+
+},8000);
+
+// ==========================
+// DEBUG
+// ==========================
+
+console.log(
+    "OSVALDÃO NIGHTMARE INICIADO"
+);

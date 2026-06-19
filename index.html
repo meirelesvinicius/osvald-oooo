@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
 
 <meta charset="UTF-8">
@@ -12,26 +13,30 @@
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
 
 </head>
+
 <body>
 
-<!-- Tela de Carregamento -->
+<!-- LOADER -->
+
 <div id="loader">
 
     <h1>PROJETO NIGHTMARE</h1>
-    <p>Carregando...</p>
+
+    <div class="loading-bar">
+
+        <div class="loading-fill"></div>
+
+    </div>
+
+    <p>Carregando instalação...</p>
 
 </div>
 
-<!-- Fundo -->
-<div class="background"></div>
+<!-- MENU -->
 
-<!-- Overlay Escuro -->
-<div class="overlay"></div>
+<section id="mainMenu">
 
-<!-- Menu Principal -->
-<main class="menu-container">
-
-    <div class="logo-area">
+    <div class="menu-content">
 
         <h1 class="game-title">
             PROJETO
@@ -39,82 +44,97 @@
         </h1>
 
         <p class="subtitle">
-            Você não está sozinho...
+            Você não deveria estar aqui...
         </p>
+
+        <div class="menu-buttons">
+
+            <button id="playBtn">
+                JOGAR
+            </button>
+
+            <button id="settingsBtn">
+                CONFIGURAÇÕES
+            </button>
+
+            <button id="creditsBtn">
+                CRÉDITOS
+            </button>
+
+            <button id="exitBtn">
+                SAIR
+            </button>
+
+        </div>
 
     </div>
 
-    <nav class="menu-buttons">
+</section>
 
-        <button id="playBtn">
-            JOGAR
-        </button>
+<!-- CONFIGURAÇÕES -->
 
-        <button id="settingsBtn">
-            CONFIGURAÇÕES
-        </button>
-
-        <button id="creditsBtn">
-            CRÉDITOS
-        </button>
-
-        <button id="exitBtn">
-            SAIR
-        </button>
-
-    </nav>
-
-</main>
-
-<!-- Configurações -->
-<section class="popup" id="settingsMenu">
+<div id="settingsMenu" class="popup">
 
     <div class="popup-content">
 
         <h2>Configurações</h2>
 
         <label>
+
             Volume
-            <input type="range" min="0" max="100" value="80">
+
+            <input
+                type="range"
+                min="0"
+                max="100"
+                value="80"
+            >
+
         </label>
 
         <label>
+
             Sensibilidade
-            <input type="range" min="1" max="10" value="5">
+
+            <input
+                type="range"
+                min="1"
+                max="10"
+                value="5"
+            >
+
         </label>
 
         <button class="closePopup">
-            Fechar
+            FECHAR
         </button>
 
     </div>
 
-</section>
+</div>
 
-<!-- Créditos -->
-<section class="popup" id="creditsMenu">
+<!-- CRÉDITOS -->
+
+<div id="creditsMenu" class="popup">
 
     <div class="popup-content">
 
         <h2>Créditos</h2>
 
-        <p>
-            Desenvolvido por Você.
-        </p>
+        <p>Projeto Nightmare</p>
 
-        <p>
-            Inspirado em jogos de terror survival.
-        </p>
+        <p>Desenvolvido em HTML, CSS e JavaScript.</p>
 
         <button class="closePopup">
-            Fechar
+            FECHAR
         </button>
 
     </div>
 
-</section>
+</div>
 
-<!-- História Inicial -->
+<!-- HISTÓRIA -->
+
 <section id="introScreen">
 
     <div class="intro-box">
@@ -122,18 +142,16 @@
         <h2>RELATÓRIO CONFIDENCIAL</h2>
 
         <p>
-            Uma instalação subterrânea foi abandonada
-            após experimentos ilegais.
+            Um laboratório subterrâneo foi abandonado
+            após experiências proibidas.
         </p>
 
         <p>
-            Diversas criaturas foram registradas
-            nas câmeras de segurança.
+            Nenhuma equipe enviada retornou.
         </p>
 
         <p>
-            Sua missão é entrar no local,
-            encontrar sobreviventes e escapar vivo.
+            Sua missão é encontrar uma saída.
         </p>
 
         <button id="startMission">
@@ -144,12 +162,139 @@
 
 </section>
 
-<!-- Som Ambiente -->
+<!-- JOGO -->
+
+<section id="gameScreen">
+
+    <!-- Canvas Three.js -->
+
+    <div id="gameContainer"></div>
+
+    <!-- HUD -->
+
+    <div id="hud">
+
+        <!-- Mira -->
+
+        <div id="crosshair">
+
+            <span></span>
+
+            <span></span>
+
+        </div>
+
+        <!-- Lanterna -->
+
+        <div id="flashlightHud">
+
+            🔦 Bateria:
+            <span id="batteryValue">
+                100%
+            </span>
+        </div>
+
+        <!-- Objetivos -->
+
+        <div id="objectiveBox">
+
+            Objetivo:
+            Encontrar a chave de saída
+
+        </div>
+
+        <!-- Inventário -->
+
+        <div id="inventory">
+
+            <h3>Inventário</h3>
+
+            <ul id="inventoryList">
+
+                <li>Vazio</li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- PAUSA -->
+
+<div id="pauseMenu">
+
+    <div class="pause-content">
+
+        <h2>JOGO PAUSADO</h2>
+
+        <button id="resumeBtn">
+            CONTINUAR
+        </button>
+
+        <button id="backMenuBtn">
+            MENU PRINCIPAL
+        </button>
+
+    </div>
+
+</div>
+
+<!-- MORTE -->
+
+<div id="deathScreen">
+
+    <div class="death-content">
+
+        <h1>VOCÊ MORREU</h1>
+
+        <p>
+            A criatura encontrou você.
+        </p>
+
+        <button id="restartBtn">
+            TENTAR NOVAMENTE
+        </button>
+
+    </div>
+
+</div>
+
+<!-- ÁUDIO -->
+
 <audio id="ambientAudio" loop>
 
-    <source src="audio/ambient.mp3" type="audio/mpeg">
+    <source
+        src="audio/ambient.mp3"
+        type="audio/mpeg"
+    >
 
 </audio>
+
+<audio id="monsterAudio">
+
+    <source
+        src="audio/monster.mp3"
+        type="audio/mpeg"
+    >
+
+</audio>
+
+<audio id="doorAudio">
+
+    <source
+        src="audio/door.mp3"
+        type="audio/mpeg"
+    >
+
+</audio>
+
+<!-- THREE.JS -->
+
+<script type="module" src="game.js"></script>
+
+<!-- MENU -->
 
 <script src="script.js"></script>
 

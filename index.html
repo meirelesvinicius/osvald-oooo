@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Projeto Nightmare</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+<!-- Tela de Carregamento -->
+<div id="loader">
+
+    <h1>PROJETO NIGHTMARE</h1>
+    <p>Carregando...</p>
+
+</div>
+
+<!-- Fundo -->
+<div class="background"></div>
+
+<!-- Overlay Escuro -->
+<div class="overlay"></div>
+
+<!-- Menu Principal -->
+<main class="menu-container">
+
+    <div class="logo-area">
+
+        <h1 class="game-title">
+            PROJETO
+            <span>NIGHTMARE</span>
+        </h1>
+
+        <p class="subtitle">
+            Você não está sozinho...
+        </p>
+
+    </div>
+
+    <nav class="menu-buttons">
+
+        <button id="playBtn">
+            JOGAR
+        </button>
+
+        <button id="settingsBtn">
+            CONFIGURAÇÕES
+        </button>
+
+        <button id="creditsBtn">
+            CRÉDITOS
+        </button>
+
+        <button id="exitBtn">
+            SAIR
+        </button>
+
+    </nav>
+
+</main>
+
+<!-- Configurações -->
+<section class="popup" id="settingsMenu">
+
+    <div class="popup-content">
+
+        <h2>Configurações</h2>
+
+        <label>
+            Volume
+            <input type="range" min="0" max="100" value="80">
+        </label>
+
+        <label>
+            Sensibilidade
+            <input type="range" min="1" max="10" value="5">
+        </label>
+
+        <button class="closePopup">
+            Fechar
+        </button>
+
+    </div>
+
+</section>
+
+<!-- Créditos -->
+<section class="popup" id="creditsMenu">
+
+    <div class="popup-content">
+
+        <h2>Créditos</h2>
+
+        <p>
+            Desenvolvido por Você.
+        </p>
+
+        <p>
+            Inspirado em jogos de terror survival.
+        </p>
+
+        <button class="closePopup">
+            Fechar
+        </button>
+
+    </div>
+
+</section>
+
+<!-- História Inicial -->
+<section id="introScreen">
+
+    <div class="intro-box">
+
+        <h2>RELATÓRIO CONFIDENCIAL</h2>
+
+        <p>
+            Uma instalação subterrânea foi abandonada
+            após experimentos ilegais.
+        </p>
+
+        <p>
+            Diversas criaturas foram registradas
+            nas câmeras de segurança.
+        </p>
+
+        <p>
+            Sua missão é entrar no local,
+            encontrar sobreviventes e escapar vivo.
+        </p>
+
+        <button id="startMission">
+            INICIAR MISSÃO
+        </button>
+
+    </div>
+
+</section>
+
+<!-- Som Ambiente -->
+<audio id="ambientAudio" loop>
+
+    <source src="audio/ambient.mp3" type="audio/mpeg">
+
+</audio>
+
+<script src="script.js"></script>
+
+</body>
+</html>

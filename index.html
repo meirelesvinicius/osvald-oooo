@@ -6,21 +6,23 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Projeto Nightmare</title>
+<title>OSVALDÃO NIGHTMARE</title>
 
 <link rel="stylesheet" href="style.css">
 
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&display=swap" rel="stylesheet">
 
 </head>
 
 <body>
 
-<!-- LOADER -->
+<!-- =========================
+     LOADER
+========================= -->
 
 <div id="loader">
 
-    <h1>PROJETO NIGHTMARE</h1>
+    <h1>OSVALDÃO NIGHTMARE</h1>
 
     <div class="loading-bar">
 
@@ -28,23 +30,32 @@
 
     </div>
 
-    <p>Carregando instalação...</p>
+    <p>Carregando arquivos do hospital...</p>
 
 </div>
 
-<!-- MENU -->
+<!-- =========================
+     MENU PRINCIPAL
+========================= -->
 
 <section id="mainMenu">
+
+    <div class="menu-overlay"></div>
 
     <div class="menu-content">
 
         <h1 class="game-title">
-            PROJETO
+
+            OSVALDÃO
+
             <span>NIGHTMARE</span>
+
         </h1>
 
         <p class="subtitle">
-            Você não deveria estar aqui...
+
+            Nem todos conseguiram sair...
+
         </p>
 
         <div class="menu-buttons">
@@ -71,13 +82,15 @@
 
 </section>
 
-<!-- CONFIGURAÇÕES -->
+<!-- =========================
+     CONFIGURAÇÕES
+========================= -->
 
 <div id="settingsMenu" class="popup">
 
     <div class="popup-content">
 
-        <h2>Configurações</h2>
+        <h2>CONFIGURAÇÕES</h2>
 
         <label>
 
@@ -88,6 +101,7 @@
                 min="0"
                 max="100"
                 value="80"
+                id="volumeSlider"
             >
 
         </label>
@@ -101,6 +115,7 @@
                 min="1"
                 max="10"
                 value="5"
+                id="sensitivitySlider"
             >
 
         </label>
@@ -113,17 +128,28 @@
 
 </div>
 
-<!-- CRÉDITOS -->
+<!-- =========================
+     CRÉDITOS
+========================= -->
 
 <div id="creditsMenu" class="popup">
 
     <div class="popup-content">
 
-        <h2>Créditos</h2>
+        <h2>CRÉDITOS</h2>
 
-        <p>Projeto Nightmare</p>
+        <p>
+            OSVALDÃO NIGHTMARE
+        </p>
 
-        <p>Desenvolvido em HTML, CSS e JavaScript.</p>
+        <p>
+            Jogo de terror em primeira pessoa.
+        </p>
+
+        <p>
+            Inspirado em exploração, sobrevivência
+            e suspense.
+        </p>
 
         <button class="closePopup">
             FECHAR
@@ -133,40 +159,56 @@
 
 </div>
 
-<!-- HISTÓRIA -->
+<!-- =========================
+     INTRODUÇÃO
+========================= -->
 
 <section id="introScreen">
 
     <div class="intro-box">
 
-        <h2>RELATÓRIO CONFIDENCIAL</h2>
+        <h2>ARQUIVO CONFIDENCIAL</h2>
 
         <p>
-            Um laboratório subterrâneo foi abandonado
-            após experiências proibidas.
+            O Hospital Psiquiátrico Osvaldão
+            foi fechado após diversos
+            desaparecimentos misteriosos.
         </p>
 
         <p>
-            Nenhuma equipe enviada retornou.
+            Equipes de resgate entraram
+            no local e nunca mais foram vistas.
         </p>
 
         <p>
-            Sua missão é encontrar uma saída.
+            Moradores da região afirmam ouvir
+            gritos vindos dos corredores
+            durante a madrugada.
+        </p>
+
+        <p>
+            Sua missão é investigar o local,
+            descobrir o que aconteceu
+            e encontrar uma saída.
         </p>
 
         <button id="startMission">
+
             INICIAR MISSÃO
+
         </button>
 
     </div>
 
 </section>
 
-<!-- JOGO -->
+<!-- =========================
+     TELA DO JOGO
+========================= -->
 
 <section id="gameScreen">
 
-    <!-- Canvas Three.js -->
+    <!-- THREE.JS -->
 
     <div id="gameContainer"></div>
 
@@ -174,44 +216,68 @@
 
     <div id="hud">
 
-        <!-- Mira -->
+        <!-- MIRA -->
 
         <div id="crosshair">
 
-            <span></span>
-
-            <span></span>
+            <div class="cross-top"></div>
+            <div class="cross-bottom"></div>
+            <div class="cross-left"></div>
+            <div class="cross-right"></div>
 
         </div>
 
-        <!-- Lanterna -->
-
-        <div id="flashlightHud">
-
-            🔦 Bateria:
-            <span id="batteryValue">
-                100%
-            </span>
-        </div>
-
-        <!-- Objetivos -->
+        <!-- OBJETIVO -->
 
         <div id="objectiveBox">
 
-            Objetivo:
-            Encontrar a chave de saída
+            OBJETIVO:
+            Encontrar a chave principal.
 
         </div>
 
-        <!-- Inventário -->
+        <!-- LANERNA -->
+
+        <div id="flashlightHud">
+
+            🔦 BATERIA:
+            <span id="batteryValue">
+                100%
+            </span>
+
+        </div>
+
+        <!-- VIDA -->
+
+        <div id="healthHud">
+
+            ❤️ VIDA:
+            <span id="healthValue">
+                100
+            </span>
+
+        </div>
+
+        <!-- STAMINA -->
+
+        <div id="staminaHud">
+
+            🏃 STAMINA:
+            <span id="staminaValue">
+                100
+            </span>
+
+        </div>
+
+        <!-- INVENTÁRIO -->
 
         <div id="inventory">
 
-            <h3>Inventário</h3>
+            <h3>INVENTÁRIO</h3>
 
             <ul id="inventoryList">
 
-                <li>Vazio</li>
+                <li>Lanterna</li>
 
             </ul>
 
@@ -221,7 +287,9 @@
 
 </section>
 
-<!-- PAUSA -->
+<!-- =========================
+     MENU DE PAUSA
+========================= -->
 
 <div id="pauseMenu">
 
@@ -230,18 +298,24 @@
         <h2>JOGO PAUSADO</h2>
 
         <button id="resumeBtn">
+
             CONTINUAR
+
         </button>
 
         <button id="backMenuBtn">
+
             MENU PRINCIPAL
+
         </button>
 
     </div>
 
 </div>
 
-<!-- MORTE -->
+<!-- =========================
+     TELA DE MORTE
+========================= -->
 
 <div id="deathScreen">
 
@@ -250,18 +324,51 @@
         <h1>VOCÊ MORREU</h1>
 
         <p>
+
             A criatura encontrou você.
+
         </p>
 
         <button id="restartBtn">
+
             TENTAR NOVAMENTE
+
         </button>
 
     </div>
 
 </div>
 
-<!-- ÁUDIO -->
+<!-- =========================
+     TELA DE VITÓRIA
+========================= -->
+
+<div id="winScreen">
+
+    <div class="win-content">
+
+        <h1>VOCÊ ESCAPOU</h1>
+
+        <p>
+
+            Você descobriu os segredos
+            do Hospital Osvaldão.
+
+        </p>
+
+        <button id="playAgainBtn">
+
+            JOGAR NOVAMENTE
+
+        </button>
+
+    </div>
+
+</div>
+
+<!-- =========================
+     ÁUDIOS
+========================= -->
 
 <audio id="ambientAudio" loop>
 
@@ -290,12 +397,36 @@
 
 </audio>
 
-<!-- THREE.JS -->
+<audio id="heartbeatAudio" loop>
+
+    <source
+        src="audio/heartbeat.mp3"
+        type="audio/mpeg"
+    >
+
+</audio>
+
+<!-- =========================
+     CONTROLES
+========================= -->
+
+<div id="controlsInfo">
+
+    <h3>CONTROLES</h3>
+
+    <p>W A S D - Movimentação</p>
+    <p>SHIFT - Correr</p>
+    <p>F - Lanterna</p>
+    <p>E - Interagir</p>
+    <p>ESC - Pausar</p>
+
+</div>
+
+<!-- =========================
+     SCRIPTS
+========================= -->
 
 <script type="module" src="game.js"></script>
-
-<!-- MENU -->
-
 <script src="script.js"></script>
 
 </body>

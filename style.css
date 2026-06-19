@@ -1,967 +1,195 @@
-/* ==========================
-   RESET
-========================== */
-
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
 }
 
-html,
 body{
-    width:100%;
-    height:100%;
+    background:#000;
+    font-family:Arial,sans-serif;
+    color:white;
     overflow:hidden;
 }
 
-body{
-    font-family:'Montserrat',sans-serif;
-    background:#000;
-    color:#fff;
-}
-
-/* ==========================
-   FUNDO
-========================== */
-
-#background{
-    position:fixed;
-    inset:0;
-
-    background:
-    linear-gradient(
-        rgba(0,0,0,.65),
-        rgba(0,0,0,.85)
-    ),
-    url("images/hospital.jpg");
-
-    background-size:cover;
-    background-position:center;
-
-    animation:bgZoom 25s infinite alternate;
-
-    z-index:-5;
-}
-
-@keyframes bgZoom{
-
-    from{
-        transform:scale(1);
-    }
-
-    to{
-        transform:scale(1.12);
-    }
-
-}
-
-/* ==========================
-   NÉVOA
-========================== */
-
-#fog-layer{
-    position:fixed;
-    inset:0;
-
-    background:
-    radial-gradient(
-        circle,
-        rgba(255,255,255,.04),
-        transparent 70%
-    );
-
-    animation:fogMove 35s linear infinite;
-
-    z-index:-4;
-}
-
-@keyframes fogMove{
-
-    from{
-        transform:translateX(-150px);
-    }
-
-    to{
-        transform:translateX(150px);
-    }
-
-}
-
-/* ==========================
-   VINHETA ESCURA
-========================== */
-
-#vignette{
-    position:fixed;
-    inset:0;
-
-    background:
-    radial-gradient(
-        circle,
-        transparent 20%,
-        rgba(0,0,0,.85) 100%
-    );
-
-    pointer-events:none;
-
-    z-index:-3;
-}
-
-/* ==========================
-   LOADER
-========================== */
+/* LOADER */
 
 #loader{
     position:fixed;
     inset:0;
-
-    background:#000;
-
+    background:black;
     display:flex;
+    flex-direction:column;
     justify-content:center;
     align-items:center;
-
     z-index:9999;
-
-    transition:1s;
 }
 
-.loader-content{
-    text-align:center;
-}
-
-.loader-content h1{
-
-    font-size:5rem;
-
-    font-family:'Cinzel',serif;
-
-    color:#fff;
-
-    text-shadow:
-    0 0 20px #ff0000,
-    0 0 40px #ff0000;
-}
-
-.loader-content h2{
-
-    font-size:4rem;
-
-    color:#ff0000;
-
-    margin-bottom:30px;
-
-    text-shadow:
-    0 0 30px #ff0000;
+.loading-box{
+    width:300px;
+    height:10px;
+    background:#222;
+    margin:20px 0;
 }
 
 .loading-bar{
-
-    width:350px;
-    height:10px;
-
-    background:#111;
-
-    border:1px solid #ff0000;
-
-    overflow:hidden;
-
-    margin:auto;
-}
-
-.loading-fill{
-
     width:0%;
     height:100%;
-
-    background:#ff0000;
-
-    animation:loading 3s linear forwards;
+    background:red;
+    animation:load 3s forwards;
 }
 
-@keyframes loading{
-
-    from{
-        width:0%;
-    }
-
+@keyframes load{
     to{
         width:100%;
     }
-
 }
 
-.loader-content p{
+/* MENU */
 
-    margin-top:20px;
-
-    letter-spacing:2px;
-
-    color:#aaa;
-}
-
-/* ==========================
-   MENU
-========================== */
-
-#mainMenu{
-
+#menu{
     width:100%;
     height:100vh;
 
+    background:
+    linear-gradient(
+    rgba(0,0,0,.7),
+    rgba(0,0,0,.9));
+
     display:flex;
-
-    justify-content:space-between;
-
+    justify-content:center;
     align-items:center;
-
-    padding:60px;
 }
 
-/* ==========================
-   PAINEL ESQUERDO
-========================== */
-
-.left-panel{
-
-    width:40%;
+.content{
+    text-align:center;
 }
 
-/* ==========================
-   LOGO
-========================== */
+.title{
+    font-size:80px;
+    letter-spacing:5px;
+}
 
-.logo-main{
-
-    font-family:'Cinzel',serif;
-
-    font-size:6rem;
-
-    font-weight:900;
-
-    color:white;
-
+.title span{
+    display:block;
+    color:red;
     text-shadow:
-    0 0 15px #ff0000,
-    0 0 40px #ff0000;
+    0 0 10px red,
+    0 0 30px red;
 }
 
-.logo-sub{
-
-    font-family:'Cinzel',serif;
-
-    font-size:5rem;
-
-    color:#ff0000;
-
-    text-shadow:
-    0 0 20px #ff0000,
-    0 0 50px #ff0000;
-
-    margin-top:-10px;
+.subtitle{
+    margin-top:15px;
+    color:#ccc;
 }
 
-.tagline{
-
-    margin-top:20px;
-
-    letter-spacing:4px;
-
-    color:#cfcfcf;
-}
-
-/* ==========================
-   BOTÕES
-========================== */
-
-.menu-buttons{
+.buttons{
+    margin-top:40px;
 
     display:flex;
-
     flex-direction:column;
 
-    gap:18px;
-
-    margin-top:50px;
+    gap:15px;
 }
 
-.menu-buttons button{
+.buttons button{
+    width:280px;
+    padding:15px;
 
-    width:320px;
-
-    padding:18px;
-
-    border:1px solid #ff0000;
-
-    background:rgba(0,0,0,.5);
+    background:black;
 
     color:white;
 
-    font-size:1rem;
-
-    letter-spacing:3px;
+    border:1px solid red;
 
     cursor:pointer;
 
     transition:.3s;
 }
 
-.menu-buttons button:hover{
-
-    background:#8b0000;
-
-    transform:translateX(10px);
-
-    box-shadow:
-    0 0 20px #ff0000;
+.buttons button:hover{
+    background:red;
 }
 
-/* ==========================
-   PAINEL DIREITO
-========================== */
-
-.right-panel{
-
-    width:350px;
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:25px;
-}
-
-/* ==========================
-   CARDS
-========================== */
-
-.player-card,
-.news-box,
-.progress-box{
-
-    background:
-    rgba(0,0,0,.55);
-
-    border:1px solid rgba(255,0,0,.4);
-
-    backdrop-filter:blur(8px);
-
-    padding:20px;
-
-    border-radius:12px;
-
-    box-shadow:
-    0 0 25px rgba(255,0,0,.15);
-}
-
-.player-avatar{
-
-    font-size:4rem;
-
-    text-align:center;
-
-    margin-bottom:10px;
-}
-
-.player-card h3{
-
-    text-align:center;
-
-    margin-bottom:10px;
-}
-
-.player-card p{
-
-    margin-top:8px;
-}
-
-/* ==========================
-   NEWS
-========================== */
-
-.news-box h2{
-
-    margin-bottom:15px;
-
-    color:#ff4d4d;
-}
-
-.news-item{
-
-    padding:10px;
-
-    border-left:3px solid #ff0000;
-
-    margin-bottom:15px;
-}
-
-.news-item h3{
-
-    margin-bottom:5px;
-}
-
-/* ==========================
-   PROGRESSO
-========================== */
-
-.progress-box h2{
-
-    margin-bottom:15px;
-}
-
-.progress-bar{
-
-    width:100%;
-
-    height:14px;
-
-    background:#111;
-
-    border-radius:20px;
-
-    overflow:hidden;
-}
-
-.progress-fill{
-
-    width:15%;
-
-    height:100%;
-
-    background:#ff0000;
-
-    box-shadow:
-    0 0 15px #ff0000;
-}
-
-#progressText{
-
-    display:block;
-
-    text-align:center;
-
-    margin-top:10px;
-}
-
-/* ==========================
-   MONSTRO FLASH
-========================== */
-
-#monsterFlash{
-
-    position:fixed;
-
-    inset:0;
-
-    width:100%;
-
-    height:100%;
-
-    object-fit:cover;
-
-    opacity:0;
-
-    pointer-events:none;
-
-    z-index:5000;
-}
-
-/* ==========================
-   CONTROLES
-========================== */
-
-#controlsInfo{
-
-    position:fixed;
-
-    right:20px;
-    bottom:20px;
-
-    width:220px;
-
-    padding:15px;
-
-    background:
-    rgba(0,0,0,.6);
-
-    border:1px solid rgba(255,0,0,.4);
-
-    border-radius:10px;
-}
-
-#controlsInfo h3{
-
-    margin-bottom:10px;
-
-    color:#ff4d4d;
-}
-
-#controlsInfo p{
-
-    margin-top:5px;
-
-    font-size:.9rem;
-}
-
-/* ==========================
-   RESPONSIVO
-========================== */
-
-@media(max-width:1000px){
-
-    #mainMenu{
-
-        flex-direction:column;
-
-        justify-content:center;
-
-        gap:40px;
-
-        text-align:center;
-    }
-
-    .left-panel,
-    .right-panel{
-
-        width:100%;
-    }
-
-    .menu-buttons{
-
-        align-items:center;
-    }
-
-    .logo-main{
-
-        font-size:4rem;
-    }
-
-    .logo-sub{
-
-        font-size:3rem;
-    }
-
-}
-/* ==========================
-   POPUPS
-========================== */
+/* POPUPS */
 
 .popup{
-
     position:fixed;
     inset:0;
-
-    display:none;
-
-    justify-content:center;
-    align-items:center;
 
     background:rgba(0,0,0,.85);
 
-    backdrop-filter:blur(8px);
+    display:none;
 
-    z-index:8000;
+    justify-content:center;
+    align-items:center;
 }
 
-.popup-content{
+.popup-box{
+    width:400px;
 
-    width:550px;
-    max-width:90%;
+    background:#111;
 
-    background:
-    linear-gradient(
-        180deg,
-        rgba(20,20,20,.95),
-        rgba(5,5,5,.95)
-    );
+    padding:30px;
 
-    border:1px solid rgba(255,0,0,.5);
-
-    border-radius:15px;
-
-    padding:35px;
-
-    box-shadow:
-    0 0 30px rgba(255,0,0,.3),
-    0 0 80px rgba(255,0,0,.1);
-
-    animation:popupOpen .35s ease;
-}
-
-@keyframes popupOpen{
-
-    from{
-        opacity:0;
-        transform:scale(.8);
-    }
-
-    to{
-        opacity:1;
-        transform:scale(1);
-    }
-
-}
-
-.popup-content h2{
+    border:1px solid red;
 
     text-align:center;
-
-    color:#ff3333;
-
-    margin-bottom:25px;
-
-    font-family:'Cinzel',serif;
 }
 
-.popup-content label{
-
-    display:block;
-
+.popup-box h2{
     margin-bottom:20px;
-
-    font-weight:600;
 }
 
-.popup-content input[type="range"]{
+.close{
+    margin-top:20px;
 
     width:100%;
 
-    margin-top:10px;
+    padding:12px;
 }
 
-.closePopup{
+/* INTRO */
 
-    width:100%;
-
-    margin-top:25px;
-
-    padding:15px;
-
-    border:none;
-
-    background:#8b0000;
-
-    color:white;
-
-    cursor:pointer;
-
-    font-weight:700;
-
-    transition:.3s;
-}
-
-.closePopup:hover{
-
-    background:#c00000;
-
-    box-shadow:
-    0 0 20px #ff0000;
-}
-
-/* ==========================
-   BOTÕES DIFICULDADE
-========================== */
-
-.difficulty-option{
-
-    width:100%;
-
-    padding:16px;
-
-    margin-bottom:12px;
-
-    border:1px solid #ff0000;
-
-    background:rgba(255,0,0,.08);
-
-    color:white;
-
-    font-size:1rem;
-
-    cursor:pointer;
-
-    transition:.3s;
-}
-
-.difficulty-option:hover{
-
-    background:#8b0000;
-
-    transform:translateX(5px);
-}
-
-/* ==========================
-   INTRODUÇÃO
-========================== */
-
-#introScreen{
-
+#intro{
     position:fixed;
     inset:0;
+
+    background:black;
 
     display:none;
 
     justify-content:center;
     align-items:center;
-
-    background:
-    radial-gradient(
-        circle,
-        rgba(10,10,10,.95),
-        rgba(0,0,0,.98)
-    );
-
-    z-index:8500;
 }
 
 .intro-box{
+    width:700px;
 
-    width:800px;
     max-width:90%;
 
-    padding:45px;
-
-    border:1px solid rgba(255,0,0,.5);
-
-    background:
-    rgba(0,0,0,.7);
-
-    backdrop-filter:blur(10px);
-
-    border-radius:15px;
-
-    animation:introAppear .8s ease;
-}
-
-@keyframes introAppear{
-
-    from{
-        opacity:0;
-        transform:translateY(50px);
-    }
-
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-
+    text-align:center;
 }
 
 .intro-box h2{
-
-    text-align:center;
-
-    color:#ff0000;
-
-    margin-bottom:25px;
-
-    font-size:2rem;
-
-    font-family:'Cinzel',serif;
+    color:red;
+    margin-bottom:20px;
 }
 
 .intro-box p{
-
-    line-height:1.8;
-
     margin-bottom:15px;
-
-    color:#ddd;
+    line-height:1.7;
 }
 
-#startMission{
+#startGame{
+    margin-top:20px;
 
-    display:block;
+    padding:15px 40px;
 
-    width:100%;
-
-    margin-top:25px;
-
-    padding:18px;
+    background:red;
 
     border:none;
 
-    background:#8b0000;
-
     color:white;
 
-    font-size:1rem;
-
-    font-weight:700;
-
     cursor:pointer;
-
-    transition:.3s;
-}
-
-#startMission:hover{
-
-    background:#c00000;
-
-    box-shadow:
-    0 0 25px #ff0000;
-}
-
-/* ==========================
-   EFEITO PISCAR LUZ
-========================== */
-
-@keyframes flicker{
-
-    0%{
-        opacity:1;
-    }
-
-    2%{
-        opacity:.2;
-    }
-
-    4%{
-        opacity:1;
-    }
-
-    7%{
-        opacity:.5;
-    }
-
-    10%{
-        opacity:1;
-    }
-
-    100%{
-        opacity:1;
-    }
-
-}
-
-.logo-main,
-.logo-sub{
-
-    animation:flicker 8s infinite;
-}
-
-/* ==========================
-   EFEITO DE SANGUE
-========================== */
-
-.blood-overlay{
-
-    position:fixed;
-    inset:0;
-
-    background:
-    radial-gradient(
-        circle at top,
-        rgba(255,0,0,.15),
-        transparent 60%
-    );
-
-    pointer-events:none;
-
-    z-index:3000;
-}
-
-/* ==========================
-   SCROLLBAR CUSTOM
-========================== */
-
-::-webkit-scrollbar{
-
-    width:8px;
-}
-
-::-webkit-scrollbar-track{
-
-    background:#111;
-}
-
-::-webkit-scrollbar-thumb{
-
-    background:#8b0000;
-}
-
-::-webkit-scrollbar-thumb:hover{
-
-    background:#c00000;
-}
-
-/* ==========================
-   ANIMAÇÃO CARDS
-========================== */
-
-.player-card,
-.news-box,
-.progress-box{
-
-    animation:cardFloat 6s ease-in-out infinite;
-}
-
-@keyframes cardFloat{
-
-    0%{
-        transform:translateY(0);
-    }
-
-    50%{
-        transform:translateY(-5px);
-    }
-
-    100%{
-        transform:translateY(0);
-    }
-
-}
-
-/* ==========================
-   EFEITO HOVER NOS CARDS
-========================== */
-
-.player-card:hover,
-.news-box:hover,
-.progress-box:hover{
-
-    border-color:#ff0000;
-
-    box-shadow:
-    0 0 35px rgba(255,0,0,.35);
-
-    transition:.3s;
-}
-
-/* ==========================
-   TEXTO BRILHANTE
-========================== */
-
-.news-box h2,
-.progress-box h2,
-.player-card h3{
-
-    text-shadow:
-    0 0 10px rgba(255,0,0,.6);
-}
-
-/* ==========================
-   PREPARAÇÃO PARA JUMPSCARE
-========================== */
-
-.jumpscare{
-
-    animation:jumpscareAnim .25s linear;
-}
-
-@keyframes jumpscareAnim{
-
-    0%{
-        transform:scale(1);
-    }
-
-    50%{
-        transform:scale(1.15);
-    }
-
-    100%{
-        transform:scale(1);
-    }
-
 }

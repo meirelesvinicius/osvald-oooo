@@ -1,67 +1,473 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
 <title>OSVALDÃO NIGHTMARE</title>
 
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet"
+href="style.css">
+
+<link rel="preconnect"
+href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Montserrat:wght@300;400;500;600;700&display=swap"
+rel="stylesheet">
 
 </head>
+
 <body>
+
+<!-- ================= LOADER ================= -->
 
 <div id="loader">
 
-    <h1>OSVALDÃO NIGHTMARE</h1>
+    <div class="loader-content">
 
-    <div class="loading-box">
+        <h1>OSVALDÃO</h1>
 
-        <div class="loading-bar"></div>
+        <h2>NIGHTMARE</h2>
 
-    </div>
+        <div class="loader-bar">
 
-    <p>Carregando...</p>
+            <div class="loader-progress"></div>
 
-</div>
+        </div>
 
-<section id="menu">
+        <p id="loadingText">
 
-    <div class="overlay"></div>
-
-    <div class="content">
-
-        <h1 class="title">
-
-            OSVALDÃO
-
-            <span>NIGHTMARE</span>
-
-        </h1>
-
-        <p class="subtitle">
-
-            Nem todos conseguiram sair.
+            Carregando Hospital...
 
         </p>
 
-        <div class="buttons">
+    </div>
 
-            <button id="playBtn">
-                JOGAR
-            </button>
+</div>
 
-            <button id="settingsBtn">
-                CONFIGURAÇÕES
-            </button>
+<!-- ================= FUNDO ================= -->
 
-            <button id="creditsBtn">
-                CRÉDITOS
-            </button>
+<video
+id="menuVideo"
+autoplay
+muted
+loop
+playsinline>
 
-            <button id="exitBtn">
-                SAIR
+<source
+src="assets/video/menu.mp4"
+type="video/mp4">
+
+</video>
+
+<div id="overlay"></div>
+
+<div id="noise"></div>
+
+<!-- ================= MENU ================= -->
+
+<section id="menu">
+
+<div class="menu-left">
+
+<div class="logo">
+
+<h1>
+
+OSVALDÃO
+
+</h1>
+
+<h2>
+
+NIGHTMARE
+
+</h2>
+
+<p>
+
+Ninguém conseguiu escapar.
+
+</p>
+
+</div>
+
+<nav class="menu-buttons">
+
+<button id="btnPlay">
+
+JOGAR
+
+</button>
+
+<button id="btnContinue">
+
+CONTINUAR
+
+</button>
+
+<button id="btnSettings">
+
+CONFIGURAÇÕES
+
+</button>
+
+<button id="btnCredits">
+
+CRÉDITOS
+
+</button>
+
+<button id="btnExit">
+
+SAIR
+
+</button>
+
+</nav>
+
+</div>
+
+<div class="menu-right">
+
+<div class="card">
+
+<h2>
+
+STATUS
+
+</h2>
+
+<p>
+
+Jogador:
+
+Visitante
+
+</p>
+
+<p>
+
+Escapes:
+
+0
+
+</p>
+
+<p>
+
+Mortes:
+
+0
+
+</p>
+
+<p>
+
+Versão:
+
+0.1 Alpha
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h2>
+
+NOTÍCIAS
+
+</h2>
+
+<p>
+
+✔ Hospital Principal disponível.
+
+</p>
+
+<p>
+
+✔ Novo monstro em desenvolvimento.
+
+</p>
+
+<p>
+
+✔ Multiplayer em breve.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ================= CONFIGURAR PARTIDA ================= -->
+
+<section
+id="setupScreen"
+class="window">
+
+<div class="window-box">
+
+<h2>
+
+CONFIGURAR PARTIDA
+
+</h2>
+
+<label>
+
+Nome da Sala
+
+<input
+type="text"
+id="roomName"
+value="Hospital Principal">
+
+</label>
+
+<label>
+
+Dificuldade
+
+<select id="difficulty">
+
+<option>
+
+Fácil
+
+</option>
+
+<option selected>
+
+Normal
+
+</option>
+
+<option>
+
+Difícil
+
+</option>
+
+<option>
+
+Pesadelo
+
+</option>
+
+</select>
+
+</label>
+
+<label>
+
+Modo
+
+<select id="gameMode">
+
+<option selected>
+
+Solo
+
+</option>
+
+<option disabled>
+
+Multiplayer (Em breve)
+
+</option>
+
+</select>
+
+</label>
+
+<label>
+
+Quantidade de Monstros
+
+<select id="monsterCount">
+
+<option>1</option>
+
+<option>2</option>
+
+<option>3</option>
+
+<option>5</option>
+
+</select>
+
+</label>
+
+<label>
+
+Inteligência
+
+<select id="monsterAI">
+
+<option>Baixa</option>
+
+<option selected>Normal</option>
+
+<option>Alta</option>
+
+<option>Insana</option>
+
+</select>
+
+</label>
+
+<label class="check">
+
+<input
+type="checkbox"
+checked
+id="flashlight">
+
+Começar com lanterna
+
+</label>
+
+<label class="check">
+
+<input
+type="checkbox"
+checked
+id="showObjectives">
+
+Mostrar objetivos
+
+</label>
+
+<label class="check">
+
+<input
+type="checkbox"
+id="hardcoreMode">
+
+Modo Hardcore
+
+</label>
+
+<div class="setup-buttons">
+
+<button id="btnStart">
+
+INICIAR JOGO
+
+</button>
+
+<button id="btnBack">
+
+VOLTAR
+
+</button>
+
+</div>
+
+</div>
+
+</section>
+<!-- ================= CONFIGURAÇÕES ================= -->
+
+<section id="settingsScreen" class="window">
+
+    <div class="window-box">
+
+        <h2>CONFIGURAÇÕES</h2>
+
+        <label>
+
+            Volume Geral
+
+            <input
+            type="range"
+            id="masterVolume"
+            min="0"
+            max="100"
+            value="80">
+
+        </label>
+
+        <label>
+
+            Sensibilidade
+
+            <input
+            type="range"
+            id="mouseSensitivity"
+            min="1"
+            max="10"
+            value="5">
+
+        </label>
+
+        <label>
+
+            Brilho
+
+            <input
+            type="range"
+            id="brightness"
+            min="0"
+            max="100"
+            value="50">
+
+        </label>
+
+        <label>
+
+            Campo de Visão (FOV)
+
+            <input
+            type="range"
+            id="fov"
+            min="60"
+            max="110"
+            value="75">
+
+        </label>
+
+        <label class="check">
+
+            <input
+            type="checkbox"
+            id="showFPS">
+
+            Mostrar FPS
+
+        </label>
+
+        <label class="check">
+
+            <input
+            type="checkbox"
+            checked
+            id="showBlood">
+
+            Mostrar sangue
+
+        </label>
+
+        <div class="setup-buttons">
+
+            <button
+            class="closeWindow">
+
+            FECHAR
+
             </button>
 
         </div>
@@ -70,71 +476,204 @@
 
 </section>
 
-<div class="popup" id="settings">
+<!-- ================= CRÉDITOS ================= -->
 
-    <div class="popup-box">
+<section id="creditsScreen" class="window">
 
-        <h2>CONFIGURAÇÕES</h2>
-
-        <label>
-
-            Volume
-
-            <input type="range" min="0" max="100" value="80">
-
-        </label>
-
-        <button class="close">
-            FECHAR
-        </button>
-
-    </div>
-
-</div>
-
-<div class="popup" id="credits">
-
-    <div class="popup-box">
+    <div class="window-box">
 
         <h2>CRÉDITOS</h2>
 
         <p>
+
             OSVALDÃO NIGHTMARE
+
         </p>
+
+        <br>
 
         <p>
-            Inspirado em jogos de terror.
+
+            Inspirado em jogos de terror e exploração.
+
         </p>
 
-        <button class="close">
+        <br>
+
+        <p>
+
+            Programação
+
+            HTML
+
+            CSS
+
+            JavaScript
+
+        </p>
+
+        <br>
+
+        <p>
+
+            Engine 3D
+
+            Three.js
+
+        </p>
+
+        <br>
+
+        <p>
+
+            © 2026
+
+        </p>
+
+        <div class="setup-buttons">
+
+            <button
+            class="closeWindow">
+
             FECHAR
+
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ================= INTRO ================= -->
+
+<section id="introScreen">
+
+    <div class="introBox">
+
+        <h1>
+
+            ARQUIVO CONFIDENCIAL
+
+        </h1>
+
+        <p>
+
+            18 de Outubro de 1989.
+
+        </p>
+
+        <br>
+
+        <p>
+
+            O Hospital Psiquiátrico Osvaldão foi fechado
+            após uma série de desaparecimentos.
+
+        </p>
+
+        <br>
+
+        <p>
+
+            Nenhum policial conseguiu voltar vivo.
+
+        </p>
+
+        <br>
+
+        <p>
+
+            Sua missão é encontrar documentos,
+            descobrir o que aconteceu e escapar.
+
+        </p>
+
+        <button id="continueGame">
+
+            ENTRAR NO HOSPITAL
+
         </button>
+
+    </div>
+
+</section>
+
+<!-- ================= HUD ================= -->
+
+<div id="hud">
+
+    <div id="health">
+
+        VIDA
+
+        <div class="hudBar">
+
+            <div id="healthFill"></div>
+
+        </div>
+
+    </div>
+
+    <div id="stamina">
+
+        STAMINA
+
+        <div class="hudBar">
+
+            <div id="staminaFill"></div>
+
+        </div>
+
+    </div>
+
+    <div id="battery">
+
+        LANTERNA
+
+        <div class="hudBar">
+
+            <div id="batteryFill"></div>
+
+        </div>
 
     </div>
 
 </div>
 
-<div id="intro">
+<!-- ================= TELA MORTE ================= -->
 
-    <div class="intro-box">
+<section id="deathScreen">
 
-        <h2>ARQUIVO CONFIDENCIAL</h2>
+    <div class="deathBox">
+
+        <h1>
+
+            VOCÊ MORREU
+
+        </h1>
 
         <p>
-            O Hospital Psiquiátrico Osvaldão foi fechado após desaparecimentos misteriosos.
+
+            O hospital fez mais uma vítima...
+
         </p>
 
-        <p>
-            Sua missão é entrar no local e descobrir o que aconteceu.
-        </p>
+        <button id="restartGame">
 
-        <button id="startGame">
-            ENTRAR
+            TENTAR NOVAMENTE
+
+        </button>
+
+        <button id="backToMenu">
+
+            MENU PRINCIPAL
+
         </button>
 
     </div>
 
-</div>
+</section>
 
 <script src="script.js"></script>
 

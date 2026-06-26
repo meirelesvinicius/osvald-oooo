@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>OSVALDÃO NIGHTMARE</title>
+
+<link rel="stylesheet" href="game.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.165.0/examples/js/controls/PointerLockControls.js"></script>
+
+</head>
+
+<body>
+
+<!-- ================= LOADING ================= -->
+
+<div id="gameLoading">
+
+    <h1>OSVALDÃO NIGHTMARE</h1>
+
+    <p>Entrando no Hospital...</p>
+
+    <div class="loadingBar">
+
+        <div id="loadingFill"></div>
+
+    </div>
+
+</div>
+
+<!-- ================= HUD ================= -->
+
+<div id="hud">
+
+    <div id="topHUD">
+
+        <div class="objectiveBox">
+
+            <h3>OBJETIVO</h3>
+
+            <span id="objectiveText">
+
+                Encontre uma forma de escapar.
+
+            </span>
+
+        </div>
+
+    </div>
+
+    <div id="bottomHUD">
+
+        <div class="status">
+
+            <label>VIDA</label>
+
+            <div class="bar">
+
+                <div id="lifeBar"></div>
+
+            </div>
+
+        </div>
+
+        <div class="status">
+
+            <label>STAMINA</label>
+
+            <div class="bar">
+
+                <div id="staminaBar"></div>
+
+            </div>
+
+        </div>
+
+        <div class="status">
+
+            <label>BATERIA</label>
+
+            <div class="bar">
+
+                <div id="batteryBar"></div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ================= MIRA ================= -->
+
+<div id="crosshair">
+
+    +
+
+</div>
+
+<!-- ================= INVENTÁRIO ================= -->
+
+<div id="inventory">
+
+    <h3>INVENTÁRIO</h3>
+
+    <div class="slots">
+
+        <div class="slot"></div>
+
+        <div class="slot"></div>
+
+        <div class="slot"></div>
+
+        <div class="slot"></div>
+
+        <div class="slot"></div>
+
+        <div class="slot"></div>
+
+    </div>
+
+</div>
+
+<!-- ================= PAUSE ================= -->
+
+<div id="pauseMenu">
+
+    <div class="pauseBox">
+
+        <h1>PAUSADO</h1>
+
+        <button id="resumeGame">
+
+            CONTINUAR
+
+        </button>
+
+        <button id="settingsGame">
+
+            CONFIGURAÇÕES
+
+        </button>
+
+        <button id="leaveGame">
+
+            MENU PRINCIPAL
+
+        </button>
+
+    </div>
+
+</div>
+
+<!-- ================= GAME OVER ================= -->
+
+<div id="gameOver">
+
+    <div class="gameOverBox">
+
+        <h1>VOCÊ MORREU</h1>
+
+        <p>
+
+            O Osvaldão encontrou você...
+
+        </p>
+
+        <button id="restart">
+
+            RECOMEÇAR
+
+        </button>
+
+        <button id="menu">
+
+            MENU
+
+        </button>
+
+    </div>
+
+</div>
+
+<!-- ================= VITÓRIA ================= -->
+
+<div id="victory">
+
+    <div class="victoryBox">
+
+        <h1>VOCÊ ESCAPOU</h1>
+
+        <p>
+
+            Você conseguiu sair vivo do hospital.
+
+        </p>
+
+        <button id="playAgain">
+
+            JOGAR NOVAMENTE
+
+        </button>
+
+    </div>
+
+</div>
+
+<!-- ================= CANVAS ================= -->
+
+<div id="gameContainer"></div>
+
+<script src="game.js"></script>
+
+</body>
+</html>

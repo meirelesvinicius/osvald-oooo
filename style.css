@@ -1,195 +1,1438 @@
+/*==================================================
+    OSVALDÃO NIGHTMARE
+    STYLE.CSS
+    PARTE 3.1
+==================================================*/
+
+/*==========================
+RESET
+==========================*/
+
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
 }
 
+html,
 body{
-    background:#000;
-    font-family:Arial,sans-serif;
-    color:white;
-    overflow:hidden;
-}
-
-/* LOADER */
-
-#loader{
-    position:fixed;
-    inset:0;
-    background:black;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    z-index:9999;
-}
-
-.loading-box{
-    width:300px;
-    height:10px;
-    background:#222;
-    margin:20px 0;
-}
-
-.loading-bar{
-    width:0%;
-    height:100%;
-    background:red;
-    animation:load 3s forwards;
-}
-
-@keyframes load{
-    to{
-        width:100%;
-    }
-}
-
-/* MENU */
-
-#menu{
     width:100%;
-    height:100vh;
+    height:100%;
+}
+
+body{
+
+    overflow:hidden;
+
+    background:#000;
+
+    color:#fff;
+
+    font-family:"Montserrat",sans-serif;
+
+}
+
+/*==========================
+VARIÁVEIS
+==========================*/
+
+:root{
+
+    --bg:#050505;
+    --panel:#111111;
+    --panel2:#181818;
+
+    --red:#d30000;
+    --red2:#ff3030;
+
+    --white:#ffffff;
+
+    --gray:#bbbbbb;
+
+    --border:rgba(255,255,255,.08);
+
+}
+
+/*==========================
+VIDEO
+==========================*/
+
+#menuVideo{
+
+    position:fixed;
+
+    left:0;
+    top:0;
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    z-index:-20;
+
+}
+
+/*==========================
+OVERLAY
+==========================*/
+
+#overlay{
+
+    position:fixed;
+
+    inset:0;
 
     background:
+
     linear-gradient(
-    rgba(0,0,0,.7),
-    rgba(0,0,0,.9));
+
+        rgba(0,0,0,.45),
+
+        rgba(0,0,0,.82)
+
+    );
+
+    z-index:-15;
+
+}
+
+/*==========================
+NOISE
+==========================*/
+
+#noise{
+
+    position:fixed;
+
+    inset:0;
+
+    opacity:.04;
+
+    pointer-events:none;
+
+    background-image:
+
+    radial-gradient(
+
+        #ffffff 1px,
+
+        transparent 1px
+
+    );
+
+    background-size:4px 4px;
+
+    animation:noiseMove .35s infinite;
+
+}
+
+@keyframes noiseMove{
+
+    from{
+
+        transform:translate(0);
+
+    }
+
+    to{
+
+        transform:translate(-2px,2px);
+
+    }
+
+}
+
+/*==========================
+LOADER
+==========================*/
+
+#loader{
+
+    position:fixed;
+
+    inset:0;
+
+    background:#000;
 
     display:flex;
+
     justify-content:center;
+
     align-items:center;
+
+    z-index:9999;
+
 }
 
-.content{
+.loader-content{
+
+    width:520px;
+
     text-align:center;
+
 }
 
-.title{
-    font-size:80px;
+.loader-content h1{
+
+    font-size:68px;
+
+    font-family:"Cinzel",serif;
+
     letter-spacing:5px;
+
 }
 
-.title span{
-    display:block;
-    color:red;
-    text-shadow:
-    0 0 10px red,
-    0 0 30px red;
+.loader-content h2{
+
+    color:var(--red2);
+
+    letter-spacing:12px;
+
+    margin-top:-10px;
+
+    margin-bottom:35px;
+
 }
 
-.subtitle{
-    margin-top:15px;
-    color:#ccc;
+.loader-bar{
+
+    width:100%;
+
+    height:12px;
+
+    background:#202020;
+
+    border-radius:50px;
+
+    overflow:hidden;
+
 }
 
-.buttons{
-    margin-top:40px;
+.loader-progress{
+
+    width:0%;
+
+    height:100%;
+
+    background:
+
+    linear-gradient(
+
+        90deg,
+
+        #700,
+
+        red,
+
+        #ff6666
+
+    );
+
+}
+
+#loadingText{
+
+    margin-top:18px;
+
+    color:#bbbbbb;
+
+    letter-spacing:2px;
+
+}
+
+/*==========================
+MENU
+==========================*/
+
+#menu{
+
+    width:100%;
+
+    height:100vh;
 
     display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:60px;
+
+}
+
+/*==========================
+LADO ESQUERDO
+==========================*/
+
+.menu-left{
+
+    width:45%;
+
+}
+
+.logo h1{
+
+    font-size:78px;
+
+    font-family:"Cinzel",serif;
+
+    text-shadow:
+
+    0 0 15px red,
+
+    0 0 40px red;
+
+}
+
+.logo h2{
+
+    font-size:48px;
+
+    color:var(--red2);
+
+    letter-spacing:10px;
+
+    margin-top:-8px;
+
+}
+
+.logo p{
+
+    margin-top:20px;
+
+    color:var(--gray);
+
+    letter-spacing:2px;
+
+}
+
+/*==========================
+BOTÕES
+==========================*/
+
+.menu-buttons{
+
+    display:flex;
+
     flex-direction:column;
 
-    gap:15px;
+    gap:16px;
+
+    margin-top:55px;
+
 }
 
-.buttons button{
-    width:280px;
-    padding:15px;
+.menu-buttons button{
 
-    background:black;
+    width:320px;
+
+    padding:18px;
+
+    border:1px solid rgba(255,0,0,.45);
+
+    background:rgba(10,10,10,.55);
 
     color:white;
 
-    border:1px solid red;
+    font-size:17px;
+
+    cursor:pointer;
+
+    transition:.35s;
+
+    backdrop-filter:blur(8px);
+
+    border-radius:8px;
+
+}
+
+.menu-buttons button:hover{
+
+    transform:translateX(12px);
+
+    background:rgba(180,0,0,.85);
+
+    box-shadow:
+
+    0 0 18px red;
+
+}
+
+/*==========================
+LADO DIREITO
+==========================*/
+
+.menu-right{
+
+    width:360px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:25px;
+
+}
+
+.card{
+
+    background:rgba(18,18,18,.85);
+
+    border:1px solid var(--border);
+
+    padding:25px;
+
+    border-radius:15px;
+
+    backdrop-filter:blur(10px);
+
+}
+
+.card h2{
+
+    margin-bottom:18px;
+
+    color:var(--red2);
+
+    font-family:"Cinzel",serif;
+
+}
+
+.card p{
+
+    margin-bottom:12px;
+
+    color:#dddddd;
+
+    line-height:1.6;
+
+}
+/*==================================================
+    OSVALDÃO NIGHTMARE
+    STYLE.CSS
+    PARTE 3.2
+==================================================*/
+
+/*==========================
+JANELAS
+==========================*/
+
+.window{
+
+    position:fixed;
+
+    inset:0;
+
+    display:none;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:rgba(0,0,0,.82);
+
+    backdrop-filter:blur(8px);
+
+    z-index:900;
+
+    animation:fadeWindow .35s ease;
+
+}
+
+.window.active{
+
+    display:flex;
+
+}
+
+.window-box{
+
+    width:650px;
+
+    max-width:92%;
+
+    background:rgba(15,15,15,.97);
+
+    border:1px solid rgba(255,0,0,.35);
+
+    border-radius:18px;
+
+    padding:35px;
+
+    box-shadow:
+
+    0 0 40px rgba(255,0,0,.25);
+
+}
+
+.window-box h2{
+
+    text-align:center;
+
+    margin-bottom:30px;
+
+    color:var(--red2);
+
+    font-family:"Cinzel",serif;
+
+    letter-spacing:3px;
+
+}
+
+/*==========================
+LABELS
+==========================*/
+
+.window-box label{
+
+    display:block;
+
+    margin-top:18px;
+
+    color:#dddddd;
+
+    font-size:15px;
+
+}
+
+.window-box input[type=text]{
+
+    width:100%;
+
+    margin-top:8px;
+
+    padding:15px;
+
+    background:#0f0f0f;
+
+    color:white;
+
+    border:1px solid #2c2c2c;
+
+    border-radius:8px;
+
+    outline:none;
+
+    transition:.3s;
+
+}
+
+.window-box input[type=text]:focus{
+
+    border-color:red;
+
+    box-shadow:
+
+    0 0 15px rgba(255,0,0,.35);
+
+}
+
+.window-box select{
+
+    width:100%;
+
+    margin-top:8px;
+
+    padding:15px;
+
+    background:#101010;
+
+    color:white;
+
+    border:1px solid #2a2a2a;
+
+    border-radius:8px;
+
+    outline:none;
+
+    cursor:pointer;
+
+}
+
+.window-box select:hover{
+
+    border-color:var(--red2);
+
+}
+
+.window-box input[type=range]{
+
+    width:100%;
+
+    margin-top:10px;
+
+    accent-color:red;
+
+}
+
+/*==========================
+CHECKBOX
+==========================*/
+
+.check{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    margin-top:18px;
+
+}
+
+.check input{
+
+    width:18px;
+
+    height:18px;
+
+    accent-color:red;
+
+}
+
+/*==========================
+BOTÕES
+==========================*/
+
+.setup-buttons{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    gap:15px;
+
+    margin-top:35px;
+
+}
+
+.setup-buttons button{
+
+    flex:1;
+
+    padding:15px;
+
+    border:none;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+#btnStart{
+
+    background:#b10000;
+
+    color:white;
+
+}
+
+#btnStart:hover{
+
+    background:red;
+
+    box-shadow:
+
+    0 0 20px red;
+
+}
+
+#btnBack,
+
+.closeWindow{
+
+    background:#222;
+
+    color:white;
+
+}
+
+#btnBack:hover,
+
+.closeWindow:hover{
+
+    background:#333;
+
+}
+
+/*==========================
+INTRO
+==========================*/
+
+#introScreen{
+
+    position:fixed;
+
+    inset:0;
+
+    display:none;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:rgba(0,0,0,.95);
+
+    z-index:950;
+
+}
+
+.introBox{
+
+    width:850px;
+
+    max-width:92%;
+
+    background:#090909;
+
+    border:1px solid rgba(255,0,0,.25);
+
+    padding:45px;
+
+    border-radius:15px;
+
+    text-align:center;
+
+    animation:introOpen .6s;
+
+}
+
+.introBox h1{
+
+    color:var(--red2);
+
+    margin-bottom:25px;
+
+    font-family:"Cinzel",serif;
+
+    letter-spacing:3px;
+
+}
+
+.introBox p{
+
+    color:#d5d5d5;
+
+    margin-bottom:18px;
+
+    line-height:1.8;
+
+}
+
+#continueGame{
+
+    margin-top:20px;
+
+    padding:18px 40px;
+
+    background:#b10000;
+
+    border:none;
+
+    border-radius:8px;
+
+    color:white;
 
     cursor:pointer;
 
     transition:.3s;
+
 }
 
-.buttons button:hover{
+#continueGame:hover{
+
     background:red;
+
+    box-shadow:
+
+    0 0 20px red;
+
 }
 
-/* POPUPS */
+/*==========================
+HUD
+==========================*/
 
-.popup{
+#hud{
+
     position:fixed;
-    inset:0;
 
-    background:rgba(0,0,0,.85);
+    left:25px;
+
+    bottom:25px;
 
     display:none;
 
-    justify-content:center;
-    align-items:center;
+    z-index:1500;
+
 }
 
-.popup-box{
-    width:400px;
+#hud>div{
 
-    background:#111;
+    margin-top:15px;
 
-    padding:30px;
-
-    border:1px solid red;
-
-    text-align:center;
 }
 
-.popup-box h2{
-    margin-bottom:20px;
+.hudBar{
+
+    width:240px;
+
+    height:14px;
+
+    background:#202020;
+
+    border-radius:30px;
+
+    overflow:hidden;
+
+    margin-top:6px;
+
 }
 
-.close{
-    margin-top:20px;
+#healthFill,
+
+#staminaFill,
+
+#batteryFill{
 
     width:100%;
 
-    padding:12px;
+    height:100%;
+
+    background:
+
+    linear-gradient(90deg,#900,red);
+
 }
 
-/* INTRO */
+/*==========================
+TELA DE MORTE
+==========================*/
 
-#intro{
+#deathScreen{
+
     position:fixed;
-    inset:0;
 
-    background:black;
+    inset:0;
 
     display:none;
 
     justify-content:center;
+
     align-items:center;
+
+    background:rgba(0,0,0,.95);
+
+    z-index:999;
+
 }
 
-.intro-box{
-    width:700px;
-
-    max-width:90%;
+.deathBox{
 
     text-align:center;
+
+    background:#090909;
+
+    border:1px solid rgba(255,0,0,.35);
+
+    padding:45px;
+
+    border-radius:15px;
+
+    width:500px;
+
 }
 
-.intro-box h2{
+.deathBox h1{
+
     color:red;
+
+    font-size:55px;
+
     margin-bottom:20px;
+
+    font-family:"Cinzel",serif;
+
 }
 
-.intro-box p{
-    margin-bottom:15px;
-    line-height:1.7;
+.deathBox p{
+
+    color:#ccc;
+
+    margin-bottom:25px;
+
 }
 
-#startGame{
-    margin-top:20px;
+.deathBox button{
 
-    padding:15px 40px;
+    width:100%;
 
-    background:red;
+    margin-top:12px;
+
+    padding:15px;
 
     border:none;
+
+    border-radius:8px;
+
+    background:#990000;
 
     color:white;
 
     cursor:pointer;
+
+    transition:.3s;
+
 }
+
+.deathBox button:hover{
+
+    background:red;
+
+}
+
+/*==========================
+ANIMAÇÕES
+==========================*/
+
+@keyframes fadeWindow{
+
+    from{
+
+        opacity:0;
+
+    }
+
+    to{
+
+        opacity:1;
+
+    }
+
+}
+
+@keyframes introOpen{
+
+    from{
+
+        transform:translateY(30px);
+
+        opacity:0;
+
+    }
+
+    to{
+
+        transform:translateY(0);
+
+        opacity:1;
+
+    }
+
+}
+/*==================================================
+    OSVALDÃO NIGHTMARE
+    STYLE.CSS
+    PARTE 3.3
+==================================================*/
+
+/*==========================
+EFEITO DE NÉVOA
+==========================*/
+
+body::before{
+
+    content:"";
+
+    position:fixed;
+
+    inset:-30%;
+
+    pointer-events:none;
+
+    background:
+
+    radial-gradient(circle at 20% 20%,rgba(255,255,255,.03),transparent 30%),
+
+    radial-gradient(circle at 80% 60%,rgba(255,255,255,.02),transparent 35%),
+
+    radial-gradient(circle at 40% 90%,rgba(255,255,255,.03),transparent 30%);
+
+    animation:fogMove 30s linear infinite;
+
+    z-index:-12;
+
+}
+
+@keyframes fogMove{
+
+    0%{
+
+        transform:translateX(-120px) translateY(0);
+
+    }
+
+    50%{
+
+        transform:translateX(120px) translateY(-30px);
+
+    }
+
+    100%{
+
+        transform:translateX(-120px) translateY(0);
+
+    }
+
+}
+
+/*==========================
+VINHETA
+==========================*/
+
+body::after{
+
+    content:"";
+
+    position:fixed;
+
+    inset:0;
+
+    pointer-events:none;
+
+    background:
+
+    radial-gradient(
+
+        transparent 35%,
+
+        rgba(0,0,0,.92)
+
+    );
+
+}
+
+/*==========================
+PARTÍCULAS
+==========================*/
+
+#particles{
+
+    position:fixed;
+
+    inset:0;
+
+    overflow:hidden;
+
+    pointer-events:none;
+
+    z-index:-11;
+
+}
+
+.particle{
+
+    position:absolute;
+
+    width:4px;
+
+    height:4px;
+
+    border-radius:50%;
+
+    background:white;
+
+    opacity:.15;
+
+    animation:particleFloat linear infinite;
+
+}
+
+@keyframes particleFloat{
+
+    from{
+
+        transform:translateY(110vh);
+
+    }
+
+    to{
+
+        transform:translateY(-150px);
+
+    }
+
+}
+
+/*==========================
+LOGO
+==========================*/
+
+.logo{
+
+    animation:logoFloat 5s ease-in-out infinite;
+
+}
+
+@keyframes logoFloat{
+
+    0%{
+
+        transform:translateY(0);
+
+    }
+
+    50%{
+
+        transform:translateY(-8px);
+
+    }
+
+    100%{
+
+        transform:translateY(0);
+
+    }
+
+}
+
+.logo h1{
+
+    animation:logoGlow 3s infinite alternate;
+
+}
+
+@keyframes logoGlow{
+
+    from{
+
+        text-shadow:
+
+        0 0 10px rgba(255,0,0,.5),
+
+        0 0 25px rgba(255,0,0,.3);
+
+    }
+
+    to{
+
+        text-shadow:
+
+        0 0 20px red,
+
+        0 0 45px red,
+
+        0 0 80px rgba(255,0,0,.6);
+
+    }
+
+}
+
+/*==========================
+BOTÕES
+==========================*/
+
+.menu-buttons button{
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+.menu-buttons button::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:-120%;
+
+    top:0;
+
+    width:60%;
+
+    height:100%;
+
+    background:
+
+    linear-gradient(
+
+        90deg,
+
+        transparent,
+
+        rgba(255,255,255,.35),
+
+        transparent
+
+    );
+
+    transition:.7s;
+
+}
+
+.menu-buttons button:hover::before{
+
+    left:140%;
+
+}
+
+/*==========================
+CARDS
+==========================*/
+
+.card{
+
+    transition:.35s;
+
+}
+
+.card:hover{
+
+    transform:translateY(-6px);
+
+    border-color:rgba(255,0,0,.4);
+
+    box-shadow:
+
+    0 0 20px rgba(255,0,0,.18);
+
+}
+
+/*==========================
+SCROLLBAR
+==========================*/
+
+::-webkit-scrollbar{
+
+    width:8px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#111;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#900;
+
+    border-radius:20px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:red;
+
+}
+
+/*==========================
+TRANSIÇÕES
+==========================*/
+
+button,
+input,
+select{
+
+    transition:.3s;
+
+}
+
+/*==========================
+RESPONSIVO
+==========================*/
+
+@media(max-width:1200px){
+
+#menu{
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    text-align:center;
+
+    gap:50px;
+
+}
+
+.menu-left{
+
+    width:100%;
+
+}
+
+.menu-right{
+
+    width:100%;
+
+    align-items:center;
+
+}
+
+.card{
+
+    width:420px;
+
+}
+
+.menu-buttons{
+
+    align-items:center;
+
+}
+
+}
+
+@media(max-width:768px){
+
+.logo h1{
+
+    font-size:52px;
+
+}
+
+.logo h2{
+
+    font-size:30px;
+
+}
+
+.menu-buttons button{
+
+    width:260px;
+
+}
+
+.window-box{
+
+    padding:25px;
+
+}
+
+.loader-content{
+
+    width:280px;
+
+}
+
+.loader-content h1{
+
+    font-size:44px;
+
+}
+
+.loader-content h2{
+
+    font-size:22px;
+
+}
+
+.card{
+
+    width:100%;
+
+}
+
+}
+
+/*==========================
+CLASSES JS
+==========================*/
+
+.show{
+
+    display:flex !important;
+
+}
+
+.hide{
+
+    display:none !important;
+
+}
+
+.fadeOut{
+
+    animation:fadeOut .6s forwards;
+
+}
+
+.fadeIn{
+
+    animation:fadeWindow .6s;
+
+}
+
+@keyframes fadeOut{
+
+    to{
+
+        opacity:0;
+
+        visibility:hidden;
+
+    }
+
+}
+
+/*==========================
+EFEITO DE PISCAR
+==========================*/
+
+.flicker{
+
+    animation:flicker .15s linear;
+
+}
+
+@keyframes flicker{
+
+    0%{
+
+        opacity:1;
+
+    }
+
+    25%{
+
+        opacity:.2;
+
+    }
+
+    50%{
+
+        opacity:1;
+
+    }
+
+    75%{
+
+        opacity:.35;
+
+    }
+
+    100%{
+
+        opacity:1;
+
+    }
+
+}
+
+/*==================================================
+FIM DO STYLE.CSS
+==================================================*/

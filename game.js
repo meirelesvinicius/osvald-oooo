@@ -1,496 +1,502 @@
-import * as THREE from "three";
+/*==================================================
+        OSVALDÃO NIGHTMARE
+        GAME.JS
+        PARTE 6.1.1
+==================================================*/
 
-let scene;
-let camera;
-let renderer;
+"use strict";
 
-const keys = {};
+/*=========================
+THREE.JS
+=========================*/
 
-let player = {
-    speed: 0.12,
-    runSpeed: 0.22,
-    stamina: 100,
-    health: 100
-};
+const scene = new THREE.Scene();
 
-init();
-animate();
+scene.background = new THREE.Color(0x000000);
 
-function init() {
+scene.fog = new THREE.Fog(0x000000,20,120);
 
-    scene = new THREE.Scene();
+/*=========================
+CÂMERA
+=========================*/
 
-    scene.fog = new THREE.Fog(
-        0x000000,
-        10,
-        70
-    );
+const camera = new THREE.PerspectiveCamera(
 
-    camera = new THREE.PerspectiveCamera(
-        75,
-        window.innerWidth / window.innerHeight,
-        0.1,
-        1000
-    );
+75,
 
-    camera.position.set(
-        0,
-        1.8,
-        0
-    );
+window.innerWidth/window.innerHeight,
 
-    renderer = new THREE.WebGLRenderer({
-        antialias: true
-    });
+0.1,
 
-    renderer.setSize(
-        window.innerWidth,
-        window.innerHeight
-    );
+1000
 
-    renderer.shadowMap.enabled = true;
+);
 
-    document.body.appendChild(
-        renderer.domElement
-    );
+camera.position.set(
 
-    createLights();
-    createFloor();
-    createCorridor();
+0,
 
-    setupControls();
+1.8,
 
-    window.addEventListener(
-        "resize",
-        onResize
-    );
+0
+
+);
+
+/*=========================
+RENDERER
+=========================*/
+
+const renderer = new THREE.WebGLRenderer({
+
+antialias:true
+
+});
+
+renderer.setSize(
+
+window.innerWidth,
+
+window.innerHeight
+
+);
+
+renderer.setPixelRatio(
+
+window.devicePixelRatio
+
+);
+
+renderer.shadowMap.enabled=true;
+
+renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+
+document
+.getElementById("gameContainer")
+.appendChild(renderer.domElement);
+
+/*=========================
+POINTER LOCK
+=========================*/
+
+const controls = new THREE.PointerLockControls(
+
+camera,
+
+document.body
+
+);
+
+document.body.addEventListener("click",()=>{
+
+    controls.lock();
+
+});
+
+/*=========================
+LUZ AMBIENTE
+=========================*/
+
+const ambient = new THREE.AmbientLight(
+
+0xffffff,
+
+0.18
+
+);
+
+scene.add(ambient);
+
+/*=========================
+LANTERNA
+=========================*/
+
+const flashlight = new THREE.SpotLight(
+
+0xffffff,
+
+6,
+
+40,
+
+Math.PI/8,
+
+0.5,
+
+1
+
+);
+
+flashlight.castShadow=true;
+
+flashlight.position.set(
+
+0,
+
+0,
+
+0
+
+);
+
+camera.add(flashlight);
+
+camera.add(flashlight.target);
+
+scene.add(camera);
+
+/*=========================
+RELÓGIO
+=========================*/
+
+const clock = new THREE.Clock();
+
+/*=========================
+HUD
+=========================*/
+
+let playerLife=100;
+
+let playerStamina=100;
+
+let battery=100;
+
+const lifeBar=document.getElementById("lifeBar");
+
+const staminaBar=document.getElementById("staminaBar");
+
+const batteryBar=document.getElementById("batteryBar");
+
+function updateHUD(){
+
+    lifeBar.style.width=
+
+    playerLife+"%";
+
+    staminaBar.style.width=
+
+    playerStamina+"%";
+
+    batteryBar.style.width=
+
+    battery+"%";
 
 }
 
-/* ===================
-   LUZES
-=================== */
+/*=========================
+CARREGAMENTO
+=========================*/
 
-function createLights() {
+const loadingFill=document.getElementById("loadingFill");
 
-    const ambient =
-    new THREE.AmbientLight(
-        0xffffff,
-        0.2
-    );
+const loading=document.getElementById("gameLoading");
 
-    scene.add(ambient);
+let loadingValue=0;
 
-    const flashlight =
-    new THREE.SpotLight(
-        0xffffff,
-        5
-    );
+const loadingInterval=setInterval(()=>{
 
-    flashlight.position.set(
-        0,
-        2,
-        0
-    );
+    loadingValue+=2;
 
-    flashlight.angle = 0.5;
+    loadingFill.style.width=
 
-    flashlight.distance = 25;
+    loadingValue+"%";
 
-    flashlight.castShadow = true;
+    if(loadingValue>=100){
 
-    camera.add(flashlight);
+        clearInterval(
 
-    scene.add(camera);
-
-}
-
-/* ===================
-   CHÃO
-=================== */
-
-function createFloor() {
-
-    const floor =
-    new THREE.Mesh(
-
-        new THREE.PlaneGeometry(
-            200,
-            200
-        ),
-
-        new THREE.MeshStandardMaterial({
-
-            color: 0x222222
-
-        })
-
-    );
-
-    floor.rotation.x =
-    -Math.PI / 2;
-
-    floor.receiveShadow = true;
-
-    scene.add(floor);
-
-}
-
-/* ===================
-   CORREDOR
-=================== */
-
-function createCorridor() {
-
-    const material =
-    new THREE.MeshStandardMaterial({
-
-        color: 0x444444
-
-    });
-
-    for(let z = -5; z > -150; z -= 5){
-
-        const leftWall =
-        new THREE.Mesh(
-
-            new THREE.BoxGeometry(
-                1,
-                5,
-                5
-            ),
-
-            material
+        loadingInterval
 
         );
 
-        leftWall.position.set(
-            -5,
-            2.5,
-            z
-        );
-
-        scene.add(leftWall);
-
-        const rightWall =
-        new THREE.Mesh(
-
-            new THREE.BoxGeometry(
-                1,
-                5,
-                5
-            ),
-
-            material
-
-        );
-
-        rightWall.position.set(
-            5,
-            2.5,
-            z
-        );
-
-        scene.add(rightWall);
+        loading.style.display="none";
 
     }
 
+},30);
+
+/*=========================
+RESIZE
+=========================*/
+
+window.addEventListener(
+
+"resize",
+
+()=>{
+
+camera.aspect=
+
+window.innerWidth/
+
+window.innerHeight;
+
+camera.updateProjectionMatrix();
+
+renderer.setSize(
+
+window.innerWidth,
+
+window.innerHeight
+
+);
+
+});
+
+/*=========================
+OBJETOS
+=========================*/
+
+const world=[];
+
+const monsters=[];
+
+const items=[];
+
+const doors=[];
+
+const keys=[];
+
+/*=========================
+FIM PARTE 6.1.1
+=========================*/
+/*==================================================
+        OSVALDÃO NIGHTMARE
+        GAME.JS
+        PARTE 6.1.2
+==================================================*/
+
+/*=========================
+MATERIAIS
+=========================*/
+
+const floorMaterial = new THREE.MeshStandardMaterial({
+
+    color:0x2c2c2c,
+    roughness:0.95,
+    metalness:0.05
+
+});
+
+const wallMaterial = new THREE.MeshStandardMaterial({
+
+    color:0x8f8f8f,
+    roughness:1
+
+});
+
+const ceilingMaterial = new THREE.MeshStandardMaterial({
+
+    color:0x1b1b1b
+
+});
+
+const doorMaterial = new THREE.MeshStandardMaterial({
+
+    color:0x4b2f1d
+
+});
+
+/*=========================
+CHÃO
+=========================*/
+
+const floor = new THREE.Mesh(
+
+    new THREE.PlaneGeometry(120,120),
+
+    floorMaterial
+
+);
+
+floor.rotation.x = -Math.PI/2;
+
+floor.receiveShadow = true;
+
+scene.add(floor);
+
+/*=========================
+TETO
+=========================*/
+
+const ceiling = new THREE.Mesh(
+
+    new THREE.PlaneGeometry(120,120),
+
+    ceilingMaterial
+
+);
+
+ceiling.rotation.x = Math.PI/2;
+
+ceiling.position.y = 4;
+
+scene.add(ceiling);
+
+/*=========================
+LUZES DO HOSPITAL
+=========================*/
+
+function createEmergencyLight(x,z){
+
+    const light = new THREE.PointLight(
+
+        0xff5555,
+
+        1.4,
+
+        12
+
+    );
+
+    light.position.set(x,3.4,z);
+
+    scene.add(light);
+
+    return light;
+
 }
 
-/* ===================
-   CONTROLES
-=================== */
+const emergencyLights=[];
 
-function setupControls() {
+emergencyLights.push(createEmergencyLight(0,0));
+emergencyLights.push(createEmergencyLight(20,10));
+emergencyLights.push(createEmergencyLight(-20,-15));
+emergencyLights.push(createEmergencyLight(15,-25));
 
-    document.body.addEventListener(
-        "click",
-        () => {
+/*=========================
+PAREDES
+=========================*/
 
-            document.body.requestPointerLock();
+function createWall(x,y,z,w,h,d){
 
-        }
+    const mesh = new THREE.Mesh(
+
+        new THREE.BoxGeometry(w,h,d),
+
+        wallMaterial
+
     );
 
-    document.addEventListener(
-        "keydown",
-        e => {
+    mesh.position.set(x,y,z);
 
-            keys[e.key.toLowerCase()] = true;
+    mesh.castShadow=true;
 
-        }
-    );
+    mesh.receiveShadow=true;
 
-    document.addEventListener(
-        "keyup",
-        e => {
+    scene.add(mesh);
 
-            keys[e.key.toLowerCase()] = false;
+    world.push(mesh);
 
-        }
-    );
-
-    document.addEventListener(
-        "mousemove",
-        mouseLook
-    );
+    return mesh;
 
 }
 
-let yaw = 0;
-let pitch = 0;
+/*=========================
+SALA INICIAL
+=========================*/
 
-function mouseLook(event) {
+createWall(0,2,-20,40,4,1);
 
-    if(
-        document.pointerLockElement !==
-        document.body
-    ) return;
+createWall(0,2,20,40,4,1);
 
-    yaw -= event.movementX * 0.002;
-    pitch -= event.movementY * 0.002;
+createWall(-20,2,0,1,4,40);
 
-    pitch = Math.max(
-        -1.4,
-        Math.min(
-            1.4,
-            pitch
-        )
-    );
+createWall(20,2,0,1,4,40);
 
-    camera.rotation.order = "YXZ";
+/*=========================
+CORREDOR
+=========================*/
 
-    camera.rotation.y = yaw;
-    camera.rotation.x = pitch;
+createWall(0,2,-60,12,4,1);
 
-}
+createWall(-6,2,-40,1,4,40);
 
-/* ===================
-   MOVIMENTO
-=================== */
+createWall(6,2,-40,1,4,40);
 
-function movePlayer() {
+/*=========================
+PORTA
+=========================*/
 
-    let speed =
-    keys["shift"]
-    ? player.runSpeed
-    : player.speed;
-
-    const direction =
-    new THREE.Vector3();
-
-    camera.getWorldDirection(
-        direction
-    );
-
-    direction.y = 0;
-
-    direction.normalize();
-
-    const right =
-    new THREE.Vector3();
-
-    right.crossVectors(
-        direction,
-        new THREE.Vector3(
-            0,
-            1,
-            0
-        )
-    );
-
-    if(keys["w"]) {
-
-        camera.position.add(
-            direction.clone()
-            .multiplyScalar(speed)
-        );
-
-    }
-
-    if(keys["s"]) {
-
-        camera.position.add(
-            direction.clone()
-            .multiplyScalar(-speed)
-        );
-
-    }
-
-    if(keys["a"]) {
-
-        camera.position.add(
-            right.clone()
-            .multiplyScalar(speed)
-        );
-
-    }
-
-    if(keys["d"]) {
-
-        camera.position.add(
-            right.clone()
-            .multiplyScalar(-speed)
-        );
-
-    }
-
-}
-
-/* ===================
-   MONSTRO
-=================== */
-
-const monster =
-new THREE.Mesh(
+const mainDoor = new THREE.Mesh(
 
     new THREE.BoxGeometry(
-        1.5,
+
+        2,
+
         3,
-        1.5
+
+        0.4
+
     ),
 
-    new THREE.MeshStandardMaterial({
-
-        color: 0xaa0000
-
-    })
+    doorMaterial
 
 );
 
-monster.position.set(
-    0,
-    1.5,
-    -80
+mainDoor.position.set(
+
+0,
+
+1.5,
+
+-20
+
 );
 
-scene?.add(monster);
+mainDoor.castShadow=true;
 
-function updateMonster() {
+scene.add(mainDoor);
 
-    if(!monster.parent){
+doors.push(mainDoor);
 
-        scene.add(monster);
+/*=========================
+PISCAR LUZES
+=========================*/
 
-    }
+setInterval(()=>{
 
-    monster.lookAt(
-        camera.position
-    );
+    emergencyLights.forEach(light=>{
 
-    const dir =
-    new THREE.Vector3();
+        light.intensity=
 
-    dir.subVectors(
-        camera.position,
-        monster.position
-    );
+        0.8+
 
-    const dist =
-    dir.length();
+        Math.random()*0.9;
 
-    dir.normalize();
+    });
 
-    if(dist > 2){
+},120);
 
-        monster.position.add(
-            dir.multiplyScalar(
-                0.02
-            )
-        );
+/*=========================
+TEMPO
+=========================*/
 
-    }else{
+let delta=0;
 
-        player.health -= 1;
+/*=========================
+ANIMATE
+=========================*/
 
-        if(player.health <= 0){
+function animate(){
 
-            alert(
-                "VOCÊ MORREU"
-            );
+    requestAnimationFrame(animate);
 
-            location.reload();
-
-        }
-
-    }
-
-}
-
-/* ===================
-   HUD
-=================== */
-
-function updateHUD() {
-
-    const hp =
-    document.getElementById(
-        "healthValue"
-    );
-
-    const stamina =
-    document.getElementById(
-        "staminaValue"
-    );
-
-    if(hp){
-
-        hp.textContent =
-        Math.floor(
-            player.health
-        );
-
-    }
-
-    if(stamina){
-
-        stamina.textContent =
-        Math.floor(
-            player.stamina
-        );
-
-    }
-
-}
-
-/* ===================
-   RESIZE
-=================== */
-
-function onResize() {
-
-    camera.aspect =
-    window.innerWidth /
-    window.innerHeight;
-
-    camera.updateProjectionMatrix();
-
-    renderer.setSize(
-        window.innerWidth,
-        window.innerHeight
-    );
-
-}
-
-/* ===================
-   LOOP
-=================== */
-
-function animate() {
-
-    requestAnimationFrame(
-        animate
-    );
-
-    movePlayer();
-
-    updateMonster();
+    delta=clock.getDelta();
 
     updateHUD();
 
     renderer.render(
+
         scene,
+
         camera
+
     );
 
 }
+
+animate();
+
+/*=========================
+FIM PARTE 6.1.2
+=========================*/
